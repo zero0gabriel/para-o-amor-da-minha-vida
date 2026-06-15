@@ -247,6 +247,10 @@ st.markdown(
         margin-bottom: 8px;
     }
 
+    .mini-card p {
+        margin: 0;
+    }
+
     .quote {
         color: #f5f3ff;
         font-family: 'Playfair Display', serif;
@@ -425,12 +429,7 @@ def avancar() -> None:
 
 def montar_cards(items: list[tuple[str, str]]) -> str:
     cards = "".join(
-        f"""
-        <div class="mini-card">
-            <strong>{titulo}</strong>
-            {texto}
-        </div>
-        """
+        f'<div class="mini-card"><strong>{titulo}</strong><p>{texto}</p></div>'
         for titulo, texto in items
     )
     return f'<div class="mini-grid">{cards}</div>'
@@ -438,15 +437,8 @@ def montar_cards(items: list[tuple[str, str]]) -> str:
 
 def montar_timeline(items: list[tuple[str, str, str]]) -> str:
     partes = "".join(
-        f"""
-        <div class="timeline-item">
-            <div class="timeline-dot">{icone}</div>
-            <div>
-                <strong>{titulo}</strong>
-                <p>{texto}</p>
-            </div>
-        </div>
-        """
+        f'<div class="timeline-item"><div class="timeline-dot">{icone}</div>'
+        f'<div><strong>{titulo}</strong><p>{texto}</p></div></div>'
         for icone, titulo, texto in items
     )
     return f'<div class="timeline">{partes}</div>'

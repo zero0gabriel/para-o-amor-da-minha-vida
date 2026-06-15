@@ -1,10 +1,10 @@
 import os
 import random
+import base64
 
 import streamlit as st
 import streamlit.components.v1 as components
 from PIL import Image
-
 
 st.set_page_config(
     page_title="Para a Minha Princesa",
@@ -308,14 +308,6 @@ st.markdown(
         text-align: center;
     }
 
-    .final-text {
-        text-align: center;
-        color: #ddd6fe;
-        font-size: 18px;
-        line-height: 1.7;
-        margin: 0;
-    }
-
     .stButton > button {
         width: 100%;
         min-height: 44px;
@@ -362,6 +354,47 @@ st.markdown(
         border-radius: 16px;
     }
 
+    .music-player {
+        text-align: center;
+        margin: 25px 0;
+    }
+
+    .cd-container {
+        position: relative;
+        width: 260px;
+        height: 260px;
+    }
+
+    .cd {
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        object-fit: cover;
+        animation: spin 12s linear infinite;
+        border: 8px solid rgba(255, 255, 255, 0.08);
+        box-shadow:
+            0 0 35px rgba(168, 85, 247, 0.7),
+            0 0 90px rgba(168, 85, 247, 0.4);
+    }
+
+    .cd-hole {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 32px;
+        height: 32px;
+        background: #111;
+        border: 4px solid #ddd;
+        border-radius: 50%;
+        z-index: 10;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
     @media (max-width: 640px) {
         .block-container {
             padding-top: 30px;
@@ -369,13 +402,8 @@ st.markdown(
             padding-right: 18px;
         }
 
-        h1 {
-            font-size: 40px;
-        }
-
-        h2 {
-            font-size: 27px;
-        }
+        h1 { font-size: 40px; }
+        h2 { font-size: 27px; }
 
         .card, .soft-card {
             padding: 15px;
@@ -388,9 +416,7 @@ st.markdown(
             margin-right: 6px;
         }
 
-        .mini-grid {
-            grid-template-columns: 1fr;
-        }
+        .mini-grid { grid-template-columns: 1fr; }
 
         .timeline-item {
             grid-template-columns: 36px 1fr;
@@ -402,92 +428,12 @@ st.markdown(
             width: 36px;
         }
     }
-    .music-player {
-    text-align: center;
-    margin: 25px 0;
-}
-
-.cd {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    object-fit: cover;
-    animation: spin 12s linear infinite;
-
-    border: 8px solid rgba(255,255,255,0.08);
-
-    box-shadow:
-        0 0 35px rgba(168,85,247,0.7),
-        0 0 90px rgba(168,85,247,0.4);
-}
-.cd {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    object-fit: cover;
-    animation: spin 12s linear infinite;
-
-    position: relative;
-
-    border: 8px solid rgba(255,255,255,0.08);
-
-    box-shadow:
-        0 0 35px rgba(168,85,247,0.7),
-        0 0 90px rgba(168,85,247,0.4);
-}
-
-.cd::after {
-    content: "";
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    width: 30px;
-    height: 30px;
-
-    background: white;
-    border-radius: 50%;
-}
-.cd-container {
-    position: relative;
-    width: 260px;
-    height: 260px;
-}
-
-.cd-hole {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 32px;
-    height: 32px;
-
-    background: #111;
-    border: 4px solid #ddd;
-    border-radius: 50%;
-
-    z-index: 10;
-}
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
     </style>
     """,
     unsafe_allow_html=True,
 )
 
 PASTA = os.path.dirname(os.path.abspath(__file__))
-st.write("PASTA:", PASTA)
 
 FOTOS = [
     ("amor.png", "jogo aleatorio mais que foi especial"),
@@ -513,41 +459,6 @@ PROMESSAS = [
     ("lembrar", "quero guardar nossas memórias, até as pequenas que parecem bobas pra todo mundo."),
     ("escolher", "quero continuar te escolhendo nos dias bons e nos dias difíceis também."),
     ("ficar", "quero viver mais coisas com vc, sem pressa, uma de cada vez."),
-]
-
-RECADOS = {
-    "Quando estiver com saudade": "lembra que eu também fico pensando em vc do nada.",
-    "Quando o dia estiver pesado": "eu to aq ta bom? respira um pouco e deixa eu segurar isso com vc.",
-    "Quando quiser sorrir": "lembra das nossas besteiras e solta aquele KAKAKAKAK ou KAJSKAJSKAJKDJ sem medo.",
-    "Quando esquecer o quanto é especial": "volta aqui e lê de novo: vc é tudo pra mim, minha princesa.",
-}
-
-MENSAGENS_CONFORTO = [
-    "ei meu bem, eu to aq ta bom? vai com calma.",
-    "vc não precisa aguentar tudo sozinha hoje.",
-    "se o dia pesar, descansa um pouquinho, princesa.",
-    "eu queria te dar um abraço bem apertado agora.",
-    "não fica se cobrando tanto, vc já faz muito.",
-    "vc é importante pra mim até nos dias mais chatinhos.",
-    "calma, minha princesa. uma coisa de cada vez.",
-    "eu gosto de vc até quando vc tá toda bagunçadinha por dentro.",
-    "vc não precisa fingir que tá bem comigo.",
-    "se bater vontade de chorar, chora. eu continuo aq.",
-    "vc merece carinho, não cobrança.",
-    "eu tenho muito orgulho de vc, de verdade.",
-    "não deixa um dia ruim te fazer esquecer quem vc é.",
-    "vc é mais forte do que pensa, mas também merece descanso.",
-    "se sua cabeça estiver cheia, respira comigo: devagarzinho.",
-    "eu amo seu jeitinho, até quando vc acha que tá impossível.",
-    "vc pode ir devagar. devagar também chega.",
-    "não precisa ser perfeita pra ser amada.",
-    "eu gosto de vc de um jeito muito sincero.",
-    "se hoje vc só conseguir descansar, já tá tudo bem.",
-    "você não está sozinha nessa, meu bem.",
-    "se quiser falar, falar comigo. se quiser silêncio, eu fico aq também.",
-    "vc é minha princesa até nos dias difíceis.",
-    "não some dentro dos seus pensamentos ruins.",
-    "guarda isso: vc é amada, muito amada.",
 ]
 
 
@@ -631,14 +542,6 @@ MENSAGENS_POR_RECADINHO = {
 }
 
 
-def voltar() -> None:
-    st.session_state.index = (st.session_state.index - 1) % len(FOTOS)
-
-
-def avancar() -> None:
-    st.session_state.index = (st.session_state.index + 1) % len(FOTOS)
-
-
 def nova_mensagem_conforto() -> None:
     categoria = st.session_state.get("recado_escolhido", "Quando o dia estiver pesado")
     mensagens = MENSAGENS_POR_RECADINHO[categoria]
@@ -662,7 +565,8 @@ def mostrar_cards(items: list[tuple[str, str]]) -> None:
 def mostrar_timeline(items: list[tuple[str, str, str]]) -> None:
     for icone, titulo, texto in items:
         st.markdown(
-            f'<div class="timeline-item"><div class="timeline-dot">{icone}</div><div><strong>{titulo}</strong><p>{texto}</p></div></div>',
+            f'<div class="timeline-item"><div class="timeline-dot">{icone}</div>'
+            f"<div><strong>{titulo}</strong><p>{texto}</p></div></div>",
             unsafe_allow_html=True,
         )
 
@@ -671,33 +575,26 @@ if "index" not in st.session_state:
     st.session_state.index = 0
 
 st.title("Para a Minha Princesa")
-from PIL import Image
-import os
 
+# CD girando
 caminho_cd = os.path.join(PASTA, "cd.png")
-
 if os.path.exists(caminho_cd):
-    imagem_cd = Image.open(caminho_cd)
+    with open(caminho_cd, "rb") as f:
+        img_base64 = base64.b64encode(f.read()).decode()
+
+    st.markdown(
+        f"""
+        <div style="display:flex; justify-content:center; margin:20px 0;">
+            <div class="cd-container">
+                <img src="data:image/png;base64,{img_base64}" class="cd">
+                <div class="cd-hole"></div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 else:
-    st.error(f"Não encontrei: {caminho_cd}")
-
-import base64
-
-caminho_cd = "cd.png"
-with open(os.path.join(PASTA, "cd.png"), "rb") as f:
-    img_base64 = base64.b64encode(f.read()).decode()
-
-st.markdown(
-    f"""
-    <div style="display:flex; justify-content:center; margin:20px 0;">
-        <div class="cd-container">
-    <img src="data:image/png;base64,{img_base64}" class="cd">
-    <div class="cd-hole"></div>
-</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+    st.warning("Coloque cd.png na mesma pasta do app.")
 
 st.markdown(
     "<p class='texto'>Um cantinho só nosso, feito para guardar memórias, carinho e tudo aquilo que eu nem sempre consigo falar direito.</p>",
@@ -715,11 +612,9 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Galeria de fotos
 arquivo, legenda = FOTOS[st.session_state.index]
 caminho = os.path.join(PASTA, arquivo)
-st.write("PASTA =", PASTA)
-st.write("CAMINHO =", caminho)
-st.write("EXISTE?", os.path.exists(caminho))
 
 st.markdown("<div class='card'>", unsafe_allow_html=True)
 st.markdown(
@@ -728,44 +623,24 @@ st.markdown(
 )
 
 if os.path.exists(caminho):
-    imagem = Image.open(caminho)
-    st.image(imagem, use_container_width=True)
-
-    cols = st.columns(len(FOTOS))
-
-    for i, (foto, _) in enumerate(FOTOS):
-        with cols[i]:
-            caminho_thumb = os.path.join(PASTA, foto)
-
-            if os.path.exists(caminho_thumb):
-                st.image(caminho_thumb, width=140)
-
-                if st.button("Abrir", key=f"thumb_{i}"):
-                    st.session_state.index = i
-                st.rerun()
+    st.image(Image.open(caminho), use_container_width=True)
 else:
     st.warning(f"Coloque a imagem {arquivo} na mesma pasta do app.")
-    else:
-    cols = st.columns(len(FOTOS))
 
+cols = st.columns(len(FOTOS))
 for i, (foto, _) in enumerate(FOTOS):
     with cols[i]:
         caminho_thumb = os.path.join(PASTA, foto)
-
         if os.path.exists(caminho_thumb):
             st.image(caminho_thumb, width=140)
-
             if st.button("Abrir", key=f"thumb_{i}"):
                 st.session_state.index = i
                 st.rerun()
-else:
-    st.warning(f"Coloque a imagem {arquivo} na mesma pasta do app.")
 
 st.markdown(f"<h3>{legenda}</h3>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
-
-
+# Cartinha
 st.markdown(
     """
     <div class="section-title">
@@ -781,13 +656,9 @@ st.markdown(
     """
     <div class="soft-card letter">
         <p>
-         desde que vc entrou na minha vida, tudo ficou mais leve de um jeito que eu nem sei explicar.
-         eu gosto das nossas conversas, das nossas risadas, das nossas fases aleatórias e até dos momentos em que a gente só fica existindo junto..
-            queria algo que parecesse comigo, com vc, com a nossa história.
-        </p>
-        <p>
             desde que vc entrou na minha vida, tudo ficou mais leve de um jeito que eu nem sei explicar.
             eu gosto das nossas conversas, das nossas risadas, das nossas fases aleatórias e até dos momentos em que a gente só fica existindo junto.
+            queria algo que parecesse comigo, com vc, com a nossa história.
         </p>
         <p>
             eu amo como a gente se ajuda, como a gente se entende e como o nosso amor é reciproco.
@@ -799,6 +670,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Timeline
 st.markdown(
     """
     <div class="section-title">
@@ -809,9 +681,9 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 mostrar_timeline(LINHA_DO_TEMPO)
 
+# Motivos
 st.markdown(
     """
     <div class="section-title">
@@ -822,7 +694,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 mostrar_cards(MOTIVOS)
 
 st.markdown(
@@ -837,6 +708,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Promessas
 st.markdown(
     """
     <div class="section-title">
@@ -847,9 +719,9 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 mostrar_cards(PROMESSAS)
 
+# Recadinhos
 st.markdown(
     """
     <div class="section-title">

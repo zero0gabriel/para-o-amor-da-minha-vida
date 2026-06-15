@@ -757,24 +757,12 @@ st.success("🤍 ainda vamos criar muitas memórias juntos 💜")
 
 st.markdown(
     """
-    <div class="card">
-        <h2>🌙 Final secreto</h2>
-        <p class="final-text">
-            existem coisas que não cabem em palavras...<br>
-            mas cabem direitinho no coração.<br><br>
-            e você, minha princesa, mora em um dos lugares mais bonitos do meu.
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    """
-    <iframe width="0" height="0"
-    src="https://www.youtube.com/embed/FsQCwnHJ1so?autoplay=1&loop=1&playlist=FsQCwnHJ1so"
-    frameborder="0"
-    allow="autoplay">
+    <iframe
+        style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;"
+        src="https://www.youtube.com/embed/FsQCwnHJ1so?autoplay=1&loop=1&playlist=FsQCwnHJ1so&controls=0&modestbranding=1"
+        title="musica"
+        frameborder="0"
+        allow="autoplay; encrypted-media">
     </iframe>
     """,
     unsafe_allow_html=True,

@@ -617,7 +617,13 @@ if "index" not in st.session_state:
     st.session_state.index = 0
 
 st.title("Para a Minha Princesa")
-st.image("cd.png", width=220)
+from PIL import Image
+import os
+
+caminho_cd = os.path.join(os.path.dirname(__file__), "cd.png")
+imagem_cd = Image.open(caminho_cd)
+
+st.image(imagem_cd, width=220)
 
 st.markdown(
     "<p class='texto'>Um cantinho só nosso, feito para guardar memórias, carinho e tudo aquilo que eu nem sempre consigo falar direito.</p>",

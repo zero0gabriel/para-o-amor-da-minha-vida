@@ -486,8 +486,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-PASTA = "."
-st.write("PASTA:", os.path.abspath(PASTA))
+PASTA = os.path.dirname(os.path.abspath(__file__))
+st.write("PASTA:", PASTA)
 
 FOTOS = [
     ("amor.png", "jogo aleatorio mais que foi especial"),
@@ -674,14 +674,17 @@ st.title("Para a Minha Princesa")
 from PIL import Image
 import os
 
-caminho_cd = "cd.png"
-imagem_cd = Image.open(caminho_cd)
+caminho_cd = os.path.join(PASTA, "cd.png")
+
+if os.path.exists(caminho_cd):
+    imagem_cd = Image.open(caminho_cd)
+else:
+    st.error(f"Não encontrei: {caminho_cd}")
 
 import base64
 
 caminho_cd = "cd.png"
-
-with open(caminho_cd, "rb") as f:
+with open(os.path.join(PASTA, "cd.png"), "rb") as f:
     img_base64 = base64.b64encode(f.read()).decode()
 
 st.markdown(
@@ -742,7 +745,7 @@ if os.path.exists(caminho):
                 st.rerun()
 else:
     st.warning(f"Coloque a imagem {arquivo} na mesma pasta do app.")
-
+    else:
     cols = st.columns(len(FOTOS))
 
 for i, (foto, _) in enumerate(FOTOS):

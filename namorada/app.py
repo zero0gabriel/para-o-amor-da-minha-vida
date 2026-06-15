@@ -402,6 +402,32 @@ st.markdown(
             width: 36px;
         }
     }
+    .music-player {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.cd {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    animation: spin 10s linear infinite;
+    border: 8px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 0 25px rgba(168,85,247,0.4),
+        0 0 60px rgba(168,85,247,0.2);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
     </style>
     """,
     unsafe_allow_html=True,

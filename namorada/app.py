@@ -619,7 +619,7 @@ if "index" not in st.session_state:
 st.title("Para a Minha Princesa")
 st.markdown("""
 <div class="music-player">
-    <img class="cd" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/CD-ROM.png/512px-CD-ROM.png">
+    st.image("cd.png", width=220)
 </div>
 """, unsafe_allow_html=True)
 

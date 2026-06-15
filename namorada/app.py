@@ -386,7 +386,7 @@ st.markdown(
 PASTA = os.path.dirname(os.path.abspath(__file__))
 
 FOTOS = [
-    ("amor.png", " O começo de tudo... aquele primeiro momento no jogo 💜"),
+    ("amor.png", "aquele primeiro momento no jogo "),
     ("amor2.jpg", " Sua skin de caveira, que eu amava quando combinava com vc 🤍"),
     ("amor3.jpg", "LSKASAKJSKASJSKAJSA"),
 ]
@@ -399,9 +399,8 @@ MOTIVOS = [
 ]
 
 LINHA_DO_TEMPO = [
-    ("🎮", "O começo", "Começou de um jeito simples, mas eu lembro com um carinho absurdo."),
+    ("🎮", "O começo", "Começou de um jeito simples, mas eu lembro com carinho."),
     ("💜", "As conversas", "Do nada você foi virando uma das melhores partes do meu dia."),
-    ("😂", "As fases aleatórias", "Teve jogo, skin, risada, fase careca e umas coisas que só a gente sabe kkkkk."),
     ("🤍", "Hoje", "Hoje eu só queria deixar isso aqui guardado, porque você é muito especial para mim."),
 ]
 

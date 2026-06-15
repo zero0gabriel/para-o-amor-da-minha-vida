@@ -733,6 +733,13 @@ if os.path.exists(caminho):
             if st.button(f"📷 {i+1}", key=f"foto_{i}"):
                 st.session_state.index = i
                 st.rerun()
+    cols = st.columns(len(FOTOS))
+
+    for i, (foto, _) in enumerate(FOTOS):
+        with cols[i]:
+            if st.button(f"📷 {i+1}", key=f"foto_{i}"):
+                st.session_state.index = i
+                st.rerun()
 else:
     st.warning(f"Coloque a imagem {arquivo} na mesma pasta do app.")
 

@@ -2,6 +2,7 @@ import os
 import random
 
 import streamlit as st
+import streamlit.components.v1 as components
 from PIL import Image
 
 
@@ -10,6 +11,29 @@ st.set_page_config(
     page_icon="💜",
     layout="centered",
 )
+
+if "pagina_abriu_no_topo" not in st.session_state:
+    st.session_state.pagina_abriu_no_topo = True
+    components.html(
+        """
+        <script>
+        const irParaOTopo = () => {
+            try {
+                window.parent.history.scrollRestoration = "manual";
+                window.parent.scrollTo(0, 0);
+                window.parent.document.documentElement.scrollTop = 0;
+                window.parent.document.body.scrollTop = 0;
+            } catch (e) {}
+        };
+
+        irParaOTopo();
+        setTimeout(irParaOTopo, 100);
+        setTimeout(irParaOTopo, 400);
+        setTimeout(irParaOTopo, 900);
+        </script>
+        """,
+        height=0,
+    )
 
 st.markdown(
     """

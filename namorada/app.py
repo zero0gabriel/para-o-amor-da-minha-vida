@@ -486,7 +486,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-PASTA = os.path.dirname(os.path.abspath(__file__))
+PASTA = "."
+st.write("PASTA:", os.path.abspath(PASTA))
 
 FOTOS = [
     ("amor.png", "jogo aleatorio mais que foi especial"),
@@ -713,6 +714,9 @@ st.markdown(
 
 arquivo, legenda = FOTOS[st.session_state.index]
 caminho = os.path.join(PASTA, arquivo)
+st.write("PASTA =", PASTA)
+st.write("CAMINHO =", caminho)
+st.write("EXISTE?", os.path.exists(caminho))
 
 st.markdown("<div class='card'>", unsafe_allow_html=True)
 st.markdown(

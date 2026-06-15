@@ -420,10 +420,34 @@ st.markdown(
         0 0 35px rgba(168,85,247,0.7),
         0 0 90px rgba(168,85,247,0.4);
 }
+.cd {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: spin 12s linear infinite;
+
+    position: relative;
+
+    border: 8px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 0 35px rgba(168,85,247,0.7),
+        0 0 90px rgba(168,85,247,0.4);
+}
+
 .cd::after {
     content: "";
-    width: 28px;
-    height: 28px;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 30px;
+    height: 30px;
+
     background: white;
     border-radius: 50%;
 }

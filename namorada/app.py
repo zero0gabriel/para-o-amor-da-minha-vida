@@ -648,7 +648,8 @@ st.markdown(
     """
     <div class="soft-card letter">
         <p>
-            eu queria fazer alguma coisa bonita, mas sem ficar com cara de texto pronto.
+         desde que vc entrou na minha vida, tudo ficou mais leve de um jeito que eu nem sei explicar.
+         eu gosto das nossas conversas, das nossas risadas, das nossas fases aleatórias e até dos momentos em que a gente só fica existindo junto..
             queria algo que parecesse comigo, com vc, com a nossa história.
         </p>
         <p>

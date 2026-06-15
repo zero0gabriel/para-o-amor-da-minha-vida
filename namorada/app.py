@@ -618,9 +618,13 @@ if "index" not in st.session_state:
 
 st.title("Para a Minha Princesa")
 st.markdown("""
-<div class="music-player">
-    st.image("cd.png", width=220)
-</div>
+st.title("Para a Minha Princesa")
+
+st.image("cd.png", width=220)
+
+st.markdown(
+    "Um cantinho só nosso, feito para guardar memórias, carinho e tudo aquilo que eu nem sempre consigo falar direito."
+)
 """, unsafe_allow_html=True)
 
 st.markdown(

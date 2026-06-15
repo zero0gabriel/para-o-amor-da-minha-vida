@@ -617,6 +617,12 @@ if "index" not in st.session_state:
     st.session_state.index = 0
 
 st.title("Para a Minha Princesa")
+st.markdown("""
+<div class="music-player">
+    <img class="cd" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/CD-ROM.png/512px-CD-ROM.png">
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown(
     "<p class='texto'>Um cantinho só nosso, feito para guardar memórias, carinho e tudo aquilo que eu nem sempre consigo falar direito.</p>",
     unsafe_allow_html=True,

@@ -416,133 +416,58 @@ FOTOS = [
 ]
 
 MOTIVOS = [
-    ("Seu jeitinho", "Não sei explicar direito, mas você tem um jeito que deixa tudo menos pesado."),
-    ("Sua companhia", "Mesmo nas coisas mais aleatórias, com você parece que fica melhor."),
-    ("Nossas risadas", "Eu gosto muito das nossas besteiras, porque são coisas que só a gente entende."),
-    ("Seu carinho", "Você tem um jeito de ficar no meu pensamento sem nem tentar."),
+    ("seu jeitinho", "vc tem um jeito que acalma tudo ao redor, e isso me pega demais."),
+    ("sua companhia", "até as coisas mais simples ficam melhores quando vc tá por perto."),
+    ("nossas risadas", "eu amo nossas besteiras, pq só a gente entende e isso é muito nossa cara."),
+    ("seu carinho", "vc tem um jeito de cuidar de mim que fica morando na minha cabeça."),
 ]
 
 LINHA_DO_TEMPO = [
-    ("🎮", "O começo", "Começou de um jeito simples, mas eu lembro com um carinho absurdo."),
-    ("💜", "As conversas", "Do nada você foi virando uma das melhores partes do meu dia."),
-    ("🤍", "Hoje", "Hoje eu só queria deixar isso aqui guardado, porque você é muito especial para mim."),
+    ("🎮", "o começo", "foi tudo meio simples no início, mas eu guardo isso com muito carinho."),
+    ("💜", "as conversas", "do nada vc foi virando uma das melhores partes do meu dia."),
+    ("🤍", "hoje", "hoje eu só sei que te amo muito e que eu queria te guardar num lugar seguro do meu coração."),
 ]
 
 PROMESSAS = [
-    ("Cuidar", "Quero tentar cuidar de você do meu jeito, mesmo que às vezes eu seja meio bobo."),
-    ("Lembrar", "Vou guardar nossas memórias, até aquelas pequenas que parecem nada."),
-    ("Escolher", "Quero continuar te escolhendo nas conversas, nos detalhes e nos dias comuns."),
-    ("Ficar", "Quero viver mais coisas com você, sem pressa, uma de cada vez."),
+    ("cuidar", "quero continuar te cuidando do meu jeito, mesmo nas minhas tentativas meio tortas."),
+    ("lembrar", "quero guardar nossas memórias, até as pequenas que parecem bobas pra todo mundo."),
+    ("escolher", "quero continuar te escolhendo nos dias bons e nos dias difíceis também."),
+    ("ficar", "quero viver mais coisas com vc, sem pressa, uma de cada vez."),
 ]
 
 RECADOS = {
-    "Quando estiver com saudade": "lembra que eu também fico bobo pensando em vc do nada.",
-    "Quando o dia estiver pesado": "respira um pouco, meu amor. vc não precisa aguentar tudo quietinha.",
-    "Quando quiser sorrir": "lembra das nossas besteiras e dessas fases aleatórias que só a gente entende.",
-    "Quando esquecer o quanto é especial": "volta aqui e lê de novo: vc é muito importante pra mim, de verdade.",
+    "Quando estiver com saudade": "lembra que eu também fico pensando em vc do nada.",
+    "Quando o dia estiver pesado": "eu to aq ta bom? respira um pouco e deixa eu segurar isso com vc.",
+    "Quando quiser sorrir": "lembra das nossas besteiras e solta aquele KAKAKAKAK ou KAJSKAJSKAJKDJ sem medo.",
+    "Quando esquecer o quanto é especial": "volta aqui e lê de novo: vc é tudo pra mim, minha princesa.",
 }
 
 MENSAGENS_CONFORTO = [
-    "Respira um pouquinho, meu amor. Vai com calma.",
-    "Você não precisa resolver a vida inteira hoje.",
-    "Se o dia foi pesado, descansa. Você merece.",
-    "Eu queria te dar um abraço bem apertado agora.",
-    "Não fica se cobrando tanto, tá? Você já tenta muito.",
-    "Você é importante para mim até nos dias que você não se sente importante.",
-    "Calma, princesa. Uma coisa de cada vez.",
-    "Eu estou aqui, mesmo que seja por essas palavrinhas.",
-    "Você não precisa fingir que está bem comigo.",
-    "Tem dias que só continuar já é muita coisa.",
-    "Eu gosto de você até quando você está toda bagunçadinha por dentro.",
-    "Seu valor não some só porque hoje foi difícil.",
-    "Não deixa um dia ruim te convencer de coisas ruins sobre você.",
-    "Você merece carinho, não cobrança.",
-    "Se sua cabeça estiver cheia, tenta respirar e soltar um pouquinho.",
-    "Eu tenho muito orgulho de você, mesmo quando você acha que não merece.",
-    "Você não é fraca por cansar.",
-    "Queria guardar seu coração num lugar bem calminho.",
-    "Você é mais forte do que pensa, mas também pode descansar.",
-    "Eu gosto de cuidar de você, até de longe.",
-    "Nada em você é demais para mim.",
-    "Se bater vontade de chorar, chora. Não tem problema.",
-    "Eu queria que você se visse com o carinho que eu te vejo.",
-    "Você não precisa carregar tudo sozinha.",
-    "Hoje pode estar confuso, mas não vai ser assim para sempre.",
-    "Eu fico aqui com você, tá?",
-    "Você é minha princesa até nos dias difíceis.",
-    "Não precisa ser perfeita para ser amada.",
-    "Eu amo seu jeitinho, inclusive quando você acha que está impossível.",
-    "Você merece uma pausa sem culpa.",
-    "A vida às vezes pesa, mas você não precisa virar pedra por causa disso.",
-    "Seu coração é bonito, mesmo quando está cansado.",
-    "Se tudo parecer grande demais, começa pelo próximo minuto.",
-    "Eu acredito em você de verdade.",
-    "Você já passou por tanta coisa e ainda está aqui. Isso importa.",
-    "Não esquece de beber água e respirar, meu bem.",
-    "Eu queria transformar sua ansiedade em paz agora.",
-    "Você pode ir devagar. Devagar também chega.",
-    "Eu não vou te achar menos incrível por você ter dias ruins.",
-    "Você é muito mais do que esse momento ruim.",
-    "Se hoje você só conseguir descansar, já está tudo bem.",
-    "Eu queria colocar sua cabecinha no meu peito e deixar o mundo quieto.",
-    "Você não está sozinha nessa.",
-    "Eu amo quando você existe perto de mim, mesmo de longe.",
-    "Seu sorriso faz falta, mas você não precisa forçar ele.",
-    "Pode ficar quietinha se quiser. Eu continuo gostando de você igual.",
-    "Você não precisa explicar tudo para merecer cuidado.",
-    "Eu gosto da sua presença de um jeito muito sincero.",
-    "Respira comigo: devagarzinho, sem pressa.",
-    "Você merece coisas leves.",
-    "Se sua mente estiver brigando com você, lembra que ela não manda na verdade toda.",
-    "Você é linda por dentro também, mesmo quando esquece disso.",
-    "Eu queria estar aí só para te lembrar que vai ficar tudo bem.",
-    "Um dia ruim não apaga a pessoa incrível que você é.",
-    "Não deixa o medo falar mais alto que o carinho que existe por você.",
-    "Você merece ser tratada com calma.",
-    "Eu gosto de você de um jeito que dá vontade de cuidar.",
-    "Se doer, fala comigo. Não guarda tudo aí dentro.",
-    "Você não precisa vencer tudo hoje.",
-    "Eu te escolheria até nos dias complicados.",
-    "Você é uma das minhas partes favoritas da vida.",
-    "Eu sei que às vezes pesa, mas eu tenho orgulho de você.",
-    "Não se compara com ninguém, meu amor. Você tem seu tempo.",
-    "Você não é um problema. Você é uma pessoa que eu amo.",
-    "Se ninguém te disse hoje: eu estou feliz por você existir.",
-    "Eu gosto até das suas manias bobinhas.",
-    "Você merece um carinho bem demorado.",
-    "Eu queria mandar paz direto para seu coração.",
-    "Você pode descansar sem achar que está falhando.",
-    "Seu jeito me faz bem de verdade.",
-    "Não precisa se diminuir para caber em lugar nenhum.",
-    "Você é suficiente, mesmo quando sua cabeça diz que não.",
-    "Eu gosto de você sem precisar de motivo novo todo dia.",
-    "Quando tudo apertar, lembra que eu me importo muito com você.",
-    "Você tem um lugar muito bonito no meu coração.",
-    "Eu amo sua forma de ser, até quando você duvida dela.",
-    "Não some dentro dos seus pensamentos ruins.",
-    "Você merece ser lembrada com amor.",
-    "Eu queria te proteger de tudo que te machuca.",
-    "Se hoje foi um dia daqueles, amanhã a gente tenta de novo.",
-    "Você não precisa dar conta de tudo para merecer orgulho.",
-    "Eu vejo muita coisa boa em você.",
-    "Você é mais querida do que imagina.",
-    "Até seu silêncio tem importância para mim.",
-    "Eu fico feliz só de saber que você existe.",
-    "Não deixa a tristeza te convencer que você está sozinha.",
-    "Você pode ser sensível. Isso também é bonito.",
-    "Eu queria que essa mensagem fosse um abraço.",
-    "Você é muito especial, sério mesmo.",
-    "Se estiver cansada, fecha os olhos um pouco. O mundo espera.",
-    "Eu gosto de você nos detalhes pequenos.",
-    "Você não precisa esconder quando estiver mal.",
-    "Eu não vou embora só porque o dia ficou difícil.",
-    "Você merece alguém que fique com paciência. Eu quero ser esse alguém.",
-    "Seu coração merece descanso.",
-    "Eu te amo mais do que eu consigo escrever bonito.",
-    "Não precisa ter vergonha de precisar de carinho.",
-    "Você é minha pessoa preferida para lembrar do nada.",
-    "Se hoje a vida parece pesada, divide um pouquinho comigo.",
-    "Guarda isso: você é amada.",
+    "ei meu bem, eu to aq ta bom? vai com calma.",
+    "vc não precisa aguentar tudo sozinha hoje.",
+    "se o dia pesar, descansa um pouquinho, princesa.",
+    "eu queria te dar um abraço bem apertado agora.",
+    "não fica se cobrando tanto, vc já faz muito.",
+    "vc é importante pra mim até nos dias mais chatinhos.",
+    "calma, minha princesa. uma coisa de cada vez.",
+    "eu gosto de vc até quando vc tá toda bagunçadinha por dentro.",
+    "vc não precisa fingir que tá bem comigo.",
+    "se bater vontade de chorar, chora. eu continuo aq.",
+    "vc merece carinho, não cobrança.",
+    "eu tenho muito orgulho de vc, de verdade.",
+    "não deixa um dia ruim te fazer esquecer quem vc é.",
+    "vc é mais forte do que pensa, mas também merece descanso.",
+    "se sua cabeça estiver cheia, respira comigo: devagarzinho.",
+    "eu amo seu jeitinho, até quando vc acha que tá impossível.",
+    "vc pode ir devagar. devagar também chega.",
+    "não precisa ser perfeita pra ser amada.",
+    "eu gosto de vc de um jeito muito sincero.",
+    "se hoje vc só conseguir descansar, já tá tudo bem.",
+    "você não está sozinha nessa, meu bem.",
+    "se quiser falar, falar comigo. se quiser silêncio, eu fico aq também.",
+    "vc é minha princesa até nos dias difíceis.",
+    "não some dentro dos seus pensamentos ruins.",
+    "guarda isso: vc é amada, muito amada.",
 ]
 
 
@@ -553,68 +478,48 @@ def criar_mensagens(inicios: list[str], finais: list[str]) -> list[str]:
 MENSAGENS_POR_RECADINHO = {
     "Quando estiver com saudade": criar_mensagens(
         [
-            "Se a saudade apertar, lembra que eu penso em vc também.",
-            "Quando bater saudade, fecha os olhos um pouquinho.",
-            "Se vc sentir minha falta, guarda isso no coração.",
-            "Quando parecer que eu estou longe demais, lembra disso.",
-            "Se der vontade de me chamar, pode chamar sem medo.",
-            "Quando a saudade chegar do nada, respira e lembra de nós.",
-            "Se o coração ficar meio quietinho de saudade, calma.",
-            "Quando vc sentir falta das nossas conversas, lembra bem.",
-            "Se a saudade vier forte, deixa ela passar com carinho.",
-            "Quando der aquele aperto por lembrar de mim, fica tranquila.",
+            "se a saudade apertar, lembra que eu também sinto a sua falta do nada.",
+            "quando bater saudade, lembra das nossas conversas e ri um pouquinho.",
+            "se vc sentir minha falta, guarda um pouco desse carinho aí dentro.",
+            "quando parecer que eu tô longe, lembra que eu continuo pensando em vc.",
+            "se der vontade de me chamar, chama sem medo.",
+            "quando a saudade vier forte, deixa ela passar e fica tranquila.",
         ],
         [
             "eu fico feliz só de existir na sua vida.",
             "vc também mora nos meus pensamentos do nada.",
             "eu gosto muito de vc, simples assim.",
             "tem um pedacinho meu torcendo pra vc ficar bem.",
-            "nossas memórias não somem só pq a gente está longe.",
+            "nossas memórias não somem só pq a gente tá longe.",
             "eu também sinto falta das nossas besteiras.",
-            "vc é uma das pessoas que eu mais gosto de lembrar.",
-            "eu queria estar aí só pra te dar um abraço.",
-            "eu guardo vc com muito carinho aqui dentro.",
-            "logo a saudade fica menor, e o carinho continua enorme.",
         ],
     ),
     "Quando o dia estiver pesado": criar_mensagens(
         [
-            "Se o dia estiver pesado, respira devagar.",
-            "Quando tudo parecer demais, vai com calma.",
-            "Se sua cabeça estiver cheia, para um pouquinho.",
-            "Quando vc estiver cansada de tudo, lembra disso.",
-            "Se hoje estiver difícil, não briga tanto com vc.",
-            "Quando parecer que vc não aguenta, segura minha mão daqui.",
-            "Se o mundo estiver barulhento demais, fica um pouco quietinha.",
-            "Quando o peito apertar, tenta respirar comigo.",
-            "Se o dia não foi gentil, eu queria ser gentil com vc.",
-            "Quando a vida pesar, não tenta carregar tudo sozinha.",
+            "se o dia tiver pesado, respira devagar.",
+            "quando tudo parecer demais, vai com calma.",
+            "se sua cabeça estiver cheia, para um pouquinho.",
+            "quando vc estiver cansada de tudo, lembra disso.",
+            "se hoje estiver difícil, não briga tanto com vc.",
+            "quando parecer que vc não aguenta, segura minha mão daqui.",
         ],
         [
             "vc não precisa resolver tudo hoje.",
             "só continuar já é muita coisa.",
             "vc merece descanso sem culpa.",
-            "eu estou aqui, mesmo que seja por mensagem.",
+            "eu to aq, mesmo que seja por mensagem.",
             "um dia ruim não define quem vc é.",
             "vc é forte, mas também merece cuidado.",
-            "eu tenho orgulho de vc por tentar.",
-            "vai passar, nem que seja aos pouquinhos.",
-            "vc merece paz no coração.",
-            "eu queria tirar um pouco desse peso de vc.",
         ],
     ),
     "Quando quiser sorrir": criar_mensagens(
         [
-            "Se vc quiser sorrir, lembra da gente no jogo.",
-            "Quando quiser rir um pouco, pensa nas nossas fases aleatórias.",
-            "Se bater vontade de ficar mais leve, lembra das nossas besteiras.",
-            "Quando o sorriso sumir, tenta lembrar dessas coisas bobas.",
-            "Se vc quiser uma lembrança boa, pega essa aqui.",
-            "Quando quiser ficar de boa, lembra do tanto que a gente já riu.",
-            "Se o dia estiver sem graça, pensa em alguma coisa nossa.",
-            "Quando quiser sorrir do nada, lembra da fase careca kkkkk.",
-            "Se vc precisar de um motivo bobo pra rir, lembra disso.",
-            "Quando tudo estiver sério demais, pensa na gente sendo besta.",
+            "se vc quiser sorrir, lembra da gente no jogo.",
+            "quando quiser rir um pouco, pensa nas nossas fases aleatórias.",
+            "se bater vontade de ficar mais leve, lembra das nossas besteiras.",
+            "quando o sorriso sumir, tenta lembrar dessas coisas bobas.",
+            "se vc quiser uma lembrança boa, pega essa aqui.",
+            "quando quiser ficar de boa, lembra do tanto que a gente já riu.",
         ],
         [
             "eu amo nossas piadas sem sentido.",
@@ -622,37 +527,25 @@ MENSAGENS_POR_RECADINHO = {
             "nossas besteiras são minhas memórias favoritas.",
             "eu gosto quando a gente vira criança do nada.",
             "só a gente entende metade das coisas, e isso é perfeito.",
-            "eu queria estar aí rindo junto com vc.",
-            "vc deixa até as coisas bobas especiais.",
-            "eu sorrio só de lembrar de algumas conversas nossas.",
-            "a gente é meio doido, mas é isso que eu gosto.",
-            "guarda esse sorrisinho, pq ele combina muito com vc.",
+            "eu queria tá aí rindo junto com vc.",
         ],
     ),
     "Quando esquecer o quanto é especial": criar_mensagens(
         [
-            "Se vc esquecer o quanto é especial, lê isso com calma.",
-            "Quando sua cabeça tentar te diminuir, lembra bem.",
-            "Se vc se sentir pouca coisa, não acredita nisso.",
-            "Quando vc duvidar de si mesma, eu te lembro.",
-            "Se bater insegurança, segura essa verdade aqui.",
-            "Quando vc achar que não é suficiente, para um segundo.",
-            "Se alguém ou alguma coisa te fizer duvidar do seu valor, lembra.",
-            "Quando vc não conseguir ver sua própria luz, eu vejo.",
-            "Se vc se sentir perdida, volta pra essa mensagem.",
-            "Quando esquecer do seu brilho, deixa eu te lembrar.",
+            "se vc esquecer o quanto é especial, lê isso com calma.",
+            "quando sua cabeça tentar te diminuir, lembra bem.",
+            "se vc se sentir pouca coisa, não acredita nisso.",
+            "quando vc duvidar de si mesma, eu te lembro.",
+            "se bater insegurança, segura essa verdade aqui.",
+            "quando vc achar que não é suficiente, para um segundo.",
         ],
         [
-            "vc é muito importante pra mim.",
+            "vc é tudo pra mim, minha princesa.",
             "vc tem um jeitinho que ninguém copia.",
             "vc faz diferença na minha vida de verdade.",
             "eu gosto de vc exatamente do seu jeito.",
             "vc é mais incrível do que imagina.",
             "eu tenho sorte de ter vc por perto.",
-            "vc merece amor, cuidado e paciência.",
-            "tem muita coisa linda em vc.",
-            "eu escolheria vc de novo, sem pensar duas vezes.",
-            "vc é minha princesa, e isso não muda nos dias difíceis.",
         ],
     ),
 }
@@ -706,8 +599,9 @@ st.markdown(
 st.markdown(
     """
     <div class="hero-note">
-        Talvez isso aqui seja só uma página, mas cada pedacinho dela foi pensado para lembrar uma coisa:
-        você importa muito para mim, e eu sou grato por cada memória que a gente já criou.
+        eu fiz isso aqui pensando em vc do jeitinho que vc merece.<br>
+        desde 03/09 do ano passado vc virou uma parte enorme de mim, e eu nem sei explicar direito o tamanho disso.<br>
+        então eu juntei nossas memórias, nossas fases e um monte de carinho pra deixar tudo com a nossa cara.
     </div>
     """,
     unsafe_allow_html=True,
@@ -743,8 +637,8 @@ st.markdown(
     """
     <div class="section-title">
         <span>cartinha</span>
-        <h2>Um pedacinho do que eu sinto</h2>
-        <p>Porque algumas coisas merecem ser guardadas com mais calma.</p>
+        <h2>um pedacinho do que eu sinto</h2>
+        <p>pq tem coisa que só faz sentido quando vem do coração.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -754,20 +648,18 @@ st.markdown(
     """
     <div class="soft-card letter">
         <p>
-            Eu queria fazer algo simples, mas bonito, para mostrar que você não passa pela minha vida como qualquer pessoa.
-            Você ficou nos detalhes: nas conversas, nas risadas, nos momentos aleatórios e até nas lembranças pequenas
-            que parecem bobas, mas que para mim têm um valor enorme.
+            eu queria fazer alguma coisa bonita, mas sem ficar com cara de texto pronto.
+            queria algo que parecesse comigo, com vc, com a nossa história.
         </p>
         <p>
-            Gosto de lembrar do começo, das nossas fases, das brincadeiras e de tudo que foi virando parte da nossa história.
-            E mesmo quando eu não encontro as palavras perfeitas, eu espero que esse cantinho consiga dizer um pouco:
-            você é especial de verdade.
+            desde que vc entrou na minha vida, tudo ficou mais leve de um jeito que eu nem sei explicar.
+            eu gosto das nossas conversas, das nossas risadas, das nossas fases aleatórias e até dos momentos em que a gente só fica existindo junto.
         </p>
         <p>
-            Obrigado por existir na minha vida, por deixar meus dias melhores e por ser essa pessoa que eu gosto tanto de cuidar,
-            admirar e chamar de minha princesa.
+            eu amo como a gente se ajuda, como a gente se entende e como o nosso amor é reciproco.
+            vc é minha princesa, meu bem, e uma das partes mais lindas da minha vida.
         </p>
-        <div class="signature">com carinho, Gabriel 💜</div>
+        <div class="signature">com carinho, gabriel 💜</div>
     </div>
     """,
     unsafe_allow_html=True,
@@ -777,8 +669,8 @@ st.markdown(
     """
     <div class="section-title">
         <span>nossa história</span>
-        <h2>Algumas partes que eu guardo</h2>
-        <p>Não precisa ser perfeito para ser inesquecível. Às vezes, o mais bonito mora no simples.</p>
+        <h2>algumas partes que eu guardo</h2>
+        <p>o mais bonito às vezes tá nas coisas mais simples mesmo.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -790,8 +682,8 @@ st.markdown(
     """
     <div class="section-title">
         <span>motivos</span>
-        <h2>Coisas que eu amo em você</h2>
-        <p>Alguns motivos, entre muitos, para você nunca duvidar do quanto é importante.</p>
+        <h2>coisas que eu amo em vc</h2>
+        <p>uns motivos, entre muitos, pra vc nunca duvidar do seu valor pra mim.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -802,9 +694,9 @@ mostrar_cards(MOTIVOS)
 st.markdown(
     """
     <div class="soft-card">
-        <p class="quote">"Você é aquele tipo de memória que dá vontade de viver de novo."</p>
+        <p class="quote">"vc é a mãe que eu quero pros meus filhos."</p>
         <p class="quote-small">
-            E eu espero que a gente ainda crie muitas outras, daquelas que fazem a gente sorrir sem perceber.
+            eu falo isso sem medo, pq eu sinto de verdade. vc é amor, parceria e paz pra mim.
         </p>
     </div>
     """,
@@ -815,8 +707,8 @@ st.markdown(
     """
     <div class="section-title">
         <span>promessas</span>
-        <h2>Para os próximos capítulos</h2>
-        <p>Não são promessas enormes. São pequenas escolhas que eu quero continuar fazendo por você.</p>
+        <h2>pros próximos capítulos</h2>
+        <p>não são promessas enormes. são jeitos simples de continuar te escolhendo todo dia.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -828,7 +720,7 @@ st.markdown(
     """
     <div class="section-title">
         <span>recadinhos</span>
-        <h2>Abra quando precisar</h2>
+        <h2>abre quando precisar</h2>
     </div>
     """,
     unsafe_allow_html=True,
@@ -864,15 +756,17 @@ if st.button("💜 Abrir surpresa final"):
     st.markdown(
         """
         <div class="secret">
-            você é uma das melhores partes da minha vida 🤍<br>
-            obrigado por tudo, por cada risada, por cada conversa e por cada memória que virou carinho em mim 💜
+            minha princesa...<br><br>
+            eu fiz isso aqui pensando em vc do jeitinho que vc é, com cada detalhe nosso que eu guardo aqui.<br><br>
+            eu amo vc do fundo do meu coração, de um jeito que eu não consigo expressar bonito sempre, mas que é real todos os dias.<br><br>
+            vc é tudo pra mim. e eu vou continuar te escolhendo, te cuidando e te amando, sempre. 💜
         </div>
         """,
         unsafe_allow_html=True,
     )
 
 st.markdown("---")
-st.success("🤍 ainda vamos criar muitas memórias juntos 💜")
+st.success("🤍 ainda vamos criar muitas memórias juntos, minha princesa 💜")
 
 st.markdown(
     """

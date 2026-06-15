@@ -425,7 +425,6 @@ MOTIVOS = [
 LINHA_DO_TEMPO = [
     ("🎮", "O começo", "Começou de um jeito simples, mas eu lembro com um carinho absurdo."),
     ("💜", "As conversas", "Do nada você foi virando uma das melhores partes do meu dia."),
-    ("😂", "As fases aleatórias", "Teve jogo, skin, risada, fase careca e umas coisas que só a gente sabe kkkkk."),
     ("🤍", "Hoje", "Hoje eu só queria deixar isso aqui guardado, porque você é muito especial para mim."),
 ]
 

@@ -386,9 +386,9 @@ st.markdown(
 PASTA = os.path.dirname(os.path.abspath(__file__))
 
 FOTOS = [
-    ("amor.png", "🎮 O começo de tudo... aquele primeiro momento no jogo 💜"),
-    ("amor2.jpg", "💀 Sua skin de caveira, que eu amava quando combinava com você 🤍"),
-    ("amor3.jpg", "😂 A lendária fase careca kkkkk momentos que eu nunca esqueço 💜"),
+    ("amor.png", " O começo de tudo... aquele primeiro momento no jogo 💜"),
+    ("amor2.jpg", " Sua skin de caveira, que eu amava quando combinava com vc 🤍"),
+    ("amor3.jpg", "LSKASAKJSKASJSKAJSA"),
 ]
 
 MOTIVOS = [

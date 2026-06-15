@@ -722,22 +722,17 @@ st.markdown(
 
 if os.path.exists(caminho):
     imagem = Image.open(caminho)
-    st.image(imagem, use_container_width=True)
+st.image(imagem, use_container_width=True)
+cols = st.columns(len(FOTOS))
 
-    st.markdown("<br>", unsafe_allow_html=True)
+for i, (foto, _) in enumerate(FOTOS):
+    with cols[i]:
+        caminho_thumb = os.path.join(PASTA, foto)
 
-    cols = st.columns(len(FOTOS))
+        if os.path.exists(caminho_thumb):
+            st.image(caminho_thumb, width=140)
 
-    for i, (foto, _) in enumerate(FOTOS):
-        with cols[i]:
-            if st.button(f"📷 {i+1}", key=f"foto_{i}"):
-                st.session_state.index = i
-                st.rerun()
-    cols = st.columns(len(FOTOS))
-
-    for i, (foto, _) in enumerate(FOTOS):
-        with cols[i]:
-            if st.button(f"📷 {i+1}", key=f"foto_{i}"):
+            if st.button("Abrir", key=f"thumb_{i}"):
                 st.session_state.index = i
                 st.rerun()
 else:

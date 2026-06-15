@@ -634,7 +634,9 @@ imagem_cd = Image.open(caminho_cd)
 
 import base64
 
-with open("cd.png", "rb") as f:
+caminho_cd = os.path.join(os.path.dirname(__file__), "cd.png")
+
+with open(caminho_cd, "rb") as f:
     img_base64 = base64.b64encode(f.read()).decode()
 
 st.markdown(

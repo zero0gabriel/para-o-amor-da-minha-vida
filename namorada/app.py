@@ -723,19 +723,23 @@ st.markdown(
 if os.path.exists(caminho):
     imagem = Image.open(caminho)
     st.image(imagem, use_container_width=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    cols = st.columns(len(FOTOS))
+
+    for i, (foto, _) in enumerate(FOTOS):
+        with cols[i]:
+            if st.button(f"📷 {i+1}", key=f"foto_{i}"):
+                st.session_state.index = i
+                st.rerun()
 else:
     st.warning(f"Coloque a imagem {arquivo} na mesma pasta do app.")
 
 st.markdown(f"<h3>{legenda}</h3>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns([1, 0.25, 1])
 
-with col1:
-    st.button("← Voltar", on_click=voltar)
-
-with col3:
-    st.button("Avançar →", on_click=avancar)
 
 st.markdown(
     """

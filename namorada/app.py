@@ -413,10 +413,10 @@ PROMESSAS = [
 ]
 
 RECADOS = {
-    "Quando estiver com saudade": "lembra que eu também fico bobo pensando em você do nada.",
-    "Quando o dia estiver pesado": "respira um pouco, meu amor. Você não precisa aguentar tudo quietinha.",
+    "Quando estiver com saudade": "lembra que eu também fico bobo pensando em vc do nada.",
+    "Quando o dia estiver pesado": "respira um pouco, meu amor. vc não precisa aguentar tudo quietinha.",
     "Quando quiser sorrir": "lembra das nossas besteiras e dessas fases aleatórias que só a gente entende.",
-    "Quando esquecer o quanto é especial": "volta aqui e lê de novo: você é muito importante para mim, de verdade.",
+    "Quando esquecer o quanto é especial": "volta aqui e lê de novo: vc é muito importante pra mim, de verdade.",
 }
 
 MENSAGENS_CONFORTO = [
@@ -523,6 +523,118 @@ MENSAGENS_CONFORTO = [
 ]
 
 
+def criar_mensagens(inicios: list[str], finais: list[str]) -> list[str]:
+    return [f"{inicio} {final}" for inicio in inicios for final in finais]
+
+
+MENSAGENS_POR_RECADINHO = {
+    "Quando estiver com saudade": criar_mensagens(
+        [
+            "Se a saudade apertar, lembra que eu penso em vc também.",
+            "Quando bater saudade, fecha os olhos um pouquinho.",
+            "Se vc sentir minha falta, guarda isso no coração.",
+            "Quando parecer que eu estou longe demais, lembra disso.",
+            "Se der vontade de me chamar, pode chamar sem medo.",
+            "Quando a saudade chegar do nada, respira e lembra de nós.",
+            "Se o coração ficar meio quietinho de saudade, calma.",
+            "Quando vc sentir falta das nossas conversas, lembra bem.",
+            "Se a saudade vier forte, deixa ela passar com carinho.",
+            "Quando der aquele aperto por lembrar de mim, fica tranquila.",
+        ],
+        [
+            "eu fico feliz só de existir na sua vida.",
+            "vc também mora nos meus pensamentos do nada.",
+            "eu gosto muito de vc, simples assim.",
+            "tem um pedacinho meu torcendo pra vc ficar bem.",
+            "nossas memórias não somem só pq a gente está longe.",
+            "eu também sinto falta das nossas besteiras.",
+            "vc é uma das pessoas que eu mais gosto de lembrar.",
+            "eu queria estar aí só pra te dar um abraço.",
+            "eu guardo vc com muito carinho aqui dentro.",
+            "logo a saudade fica menor, e o carinho continua enorme.",
+        ],
+    ),
+    "Quando o dia estiver pesado": criar_mensagens(
+        [
+            "Se o dia estiver pesado, respira devagar.",
+            "Quando tudo parecer demais, vai com calma.",
+            "Se sua cabeça estiver cheia, para um pouquinho.",
+            "Quando vc estiver cansada de tudo, lembra disso.",
+            "Se hoje estiver difícil, não briga tanto com vc.",
+            "Quando parecer que vc não aguenta, segura minha mão daqui.",
+            "Se o mundo estiver barulhento demais, fica um pouco quietinha.",
+            "Quando o peito apertar, tenta respirar comigo.",
+            "Se o dia não foi gentil, eu queria ser gentil com vc.",
+            "Quando a vida pesar, não tenta carregar tudo sozinha.",
+        ],
+        [
+            "vc não precisa resolver tudo hoje.",
+            "só continuar já é muita coisa.",
+            "vc merece descanso sem culpa.",
+            "eu estou aqui, mesmo que seja por mensagem.",
+            "um dia ruim não define quem vc é.",
+            "vc é forte, mas também merece cuidado.",
+            "eu tenho orgulho de vc por tentar.",
+            "vai passar, nem que seja aos pouquinhos.",
+            "vc merece paz no coração.",
+            "eu queria tirar um pouco desse peso de vc.",
+        ],
+    ),
+    "Quando quiser sorrir": criar_mensagens(
+        [
+            "Se vc quiser sorrir, lembra da gente no jogo.",
+            "Quando quiser rir um pouco, pensa nas nossas fases aleatórias.",
+            "Se bater vontade de ficar mais leve, lembra das nossas besteiras.",
+            "Quando o sorriso sumir, tenta lembrar dessas coisas bobas.",
+            "Se vc quiser uma lembrança boa, pega essa aqui.",
+            "Quando quiser ficar de boa, lembra do tanto que a gente já riu.",
+            "Se o dia estiver sem graça, pensa em alguma coisa nossa.",
+            "Quando quiser sorrir do nada, lembra da fase careca kkkkk.",
+            "Se vc precisar de um motivo bobo pra rir, lembra disso.",
+            "Quando tudo estiver sério demais, pensa na gente sendo besta.",
+        ],
+        [
+            "eu amo nossas piadas sem sentido.",
+            "vc rindo é uma das coisas mais lindas pra mim.",
+            "nossas besteiras são minhas memórias favoritas.",
+            "eu gosto quando a gente vira criança do nada.",
+            "só a gente entende metade das coisas, e isso é perfeito.",
+            "eu queria estar aí rindo junto com vc.",
+            "vc deixa até as coisas bobas especiais.",
+            "eu sorrio só de lembrar de algumas conversas nossas.",
+            "a gente é meio doido, mas é isso que eu gosto.",
+            "guarda esse sorrisinho, pq ele combina muito com vc.",
+        ],
+    ),
+    "Quando esquecer o quanto é especial": criar_mensagens(
+        [
+            "Se vc esquecer o quanto é especial, lê isso com calma.",
+            "Quando sua cabeça tentar te diminuir, lembra bem.",
+            "Se vc se sentir pouca coisa, não acredita nisso.",
+            "Quando vc duvidar de si mesma, eu te lembro.",
+            "Se bater insegurança, segura essa verdade aqui.",
+            "Quando vc achar que não é suficiente, para um segundo.",
+            "Se alguém ou alguma coisa te fizer duvidar do seu valor, lembra.",
+            "Quando vc não conseguir ver sua própria luz, eu vejo.",
+            "Se vc se sentir perdida, volta pra essa mensagem.",
+            "Quando esquecer do seu brilho, deixa eu te lembrar.",
+        ],
+        [
+            "vc é muito importante pra mim.",
+            "vc tem um jeitinho que ninguém copia.",
+            "vc faz diferença na minha vida de verdade.",
+            "eu gosto de vc exatamente do seu jeito.",
+            "vc é mais incrível do que imagina.",
+            "eu tenho sorte de ter vc por perto.",
+            "vc merece amor, cuidado e paciência.",
+            "tem muita coisa linda em vc.",
+            "eu escolheria vc de novo, sem pensar duas vezes.",
+            "vc é minha princesa, e isso não muda nos dias difíceis.",
+        ],
+    ),
+}
+
+
 def voltar() -> None:
     st.session_state.index = (st.session_state.index - 1) % len(FOTOS)
 
@@ -532,8 +644,10 @@ def avancar() -> None:
 
 
 def nova_mensagem_conforto() -> None:
+    categoria = st.session_state.get("recado_escolhido", "Quando o dia estiver pesado")
+    mensagens = MENSAGENS_POR_RECADINHO[categoria]
     anterior = st.session_state.get("mensagem_conforto")
-    opcoes = [mensagem for mensagem in MENSAGENS_CONFORTO if mensagem != anterior]
+    opcoes = [mensagem for mensagem in mensagens if mensagem != anterior]
     st.session_state.mensagem_conforto = random.choice(opcoes)
 
 
@@ -699,34 +813,16 @@ st.markdown(
 
 recado_escolhido = st.selectbox(
     "Escolha um recadinho",
-    list(RECADOS.keys()),
+    list(MENSAGENS_POR_RECADINHO.keys()),
+    key="recado_escolhido",
     label_visibility="collapsed",
 )
 
-st.markdown(
-    f"""
-    <div class="secret">
-        {RECADOS[recado_escolhido]}
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+if st.session_state.get("categoria_atual") != recado_escolhido:
+    st.session_state.categoria_atual = recado_escolhido
+    st.session_state.mensagem_conforto = random.choice(MENSAGENS_POR_RECADINHO[recado_escolhido])
 
-st.markdown(
-    """
-    <div class="section-title">
-        <span>conforto</span>
-        <h2>Uma mensagem nova para você</h2>
-        <p>Clica quando o coração apertar. Eu deixei várias aqui para te lembrar que você não está sozinha.</p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-if "mensagem_conforto" not in st.session_state:
-    st.session_state.mensagem_conforto = MENSAGENS_CONFORTO[0]
-
-if st.button("💌 Me dá uma mensagem de conforto"):
+if st.button("💌 Ver outra mensagem"):
     nova_mensagem_conforto()
 
 st.markdown(

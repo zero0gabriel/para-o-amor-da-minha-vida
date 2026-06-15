@@ -1,4 +1,5 @@
 import os
+import random
 
 import streamlit as st
 from PIL import Image
@@ -391,32 +392,135 @@ FOTOS = [
 ]
 
 MOTIVOS = [
-    ("Seu jeitinho", "Tem uma coisa em você que deixa qualquer dia mais leve, mesmo quando tudo parece bagunçado."),
-    ("Sua companhia", "Até as coisas simples ficam melhores quando eu lembro que você faz parte da minha vida."),
-    ("Nossas risadas", "Eu guardo cada momento bobo como se fosse uma foto que não precisa de câmera."),
-    ("Seu carinho", "Você tem um jeito de ficar no pensamento sem fazer esforço nenhum."),
+    ("Seu jeitinho", "Não sei explicar direito, mas você tem um jeito que deixa tudo menos pesado."),
+    ("Sua companhia", "Mesmo nas coisas mais aleatórias, com você parece que fica melhor."),
+    ("Nossas risadas", "Eu gosto muito das nossas besteiras, porque são coisas que só a gente entende."),
+    ("Seu carinho", "Você tem um jeito de ficar no meu pensamento sem nem tentar."),
 ]
 
 LINHA_DO_TEMPO = [
-    ("🎮", "O primeiro momento", "Tudo começou de um jeito simples, mas virou uma memória que eu gosto de lembrar."),
-    ("💜", "As conversas", "Aos poucos, cada mensagem foi virando parte boa do meu dia."),
-    ("😂", "As fases aleatórias", "Teve jogo, skin, risada, fase careca e um monte de coisa que só a gente entende."),
-    ("🤍", "O agora", "Hoje eu só queria deixar registrado que você é muito especial para mim."),
+    ("🎮", "O começo", "Começou de um jeito simples, mas eu lembro com um carinho absurdo."),
+    ("💜", "As conversas", "Do nada você foi virando uma das melhores partes do meu dia."),
+    ("😂", "As fases aleatórias", "Teve jogo, skin, risada, fase careca e umas coisas que só a gente sabe kkkkk."),
+    ("🤍", "Hoje", "Hoje eu só queria deixar isso aqui guardado, porque você é muito especial para mim."),
 ]
 
 PROMESSAS = [
-    ("Cuidar", "Prometo tentar ser abrigo nos dias difíceis e paz nos dias cansativos."),
-    ("Lembrar", "Prometo guardar nossas memórias com carinho, até as mais bobinhas."),
-    ("Escolher", "Prometo escolher você nos detalhes, nas conversas e nos pequenos gestos."),
-    ("Ficar", "Prometo querer construir mais momentos bonitos, um de cada vez."),
+    ("Cuidar", "Quero tentar cuidar de você do meu jeito, mesmo que às vezes eu seja meio bobo."),
+    ("Lembrar", "Vou guardar nossas memórias, até aquelas pequenas que parecem nada."),
+    ("Escolher", "Quero continuar te escolhendo nas conversas, nos detalhes e nos dias comuns."),
+    ("Ficar", "Quero viver mais coisas com você, sem pressa, uma de cada vez."),
 ]
 
 RECADOS = {
-    "Quando estiver com saudade": "fecha os olhos e lembra que tem alguém aqui que sorri só de pensar em você.",
-    "Quando o dia estiver pesado": "respira com calma, minha princesa. Você não precisa carregar tudo sozinha.",
-    "Quando quiser sorrir": "lembra das nossas besteiras, das fases aleatórias e de tudo que só a gente entende.",
-    "Quando esquecer o quanto é especial": "volta aqui e lê de novo: você é uma das melhores partes da minha vida.",
+    "Quando estiver com saudade": "lembra que eu também fico bobo pensando em você do nada.",
+    "Quando o dia estiver pesado": "respira um pouco, meu amor. Você não precisa aguentar tudo quietinha.",
+    "Quando quiser sorrir": "lembra das nossas besteiras e dessas fases aleatórias que só a gente entende.",
+    "Quando esquecer o quanto é especial": "volta aqui e lê de novo: você é muito importante para mim, de verdade.",
 }
+
+MENSAGENS_CONFORTO = [
+    "Respira um pouquinho, meu amor. Vai com calma.",
+    "Você não precisa resolver a vida inteira hoje.",
+    "Se o dia foi pesado, descansa. Você merece.",
+    "Eu queria te dar um abraço bem apertado agora.",
+    "Não fica se cobrando tanto, tá? Você já tenta muito.",
+    "Você é importante para mim até nos dias que você não se sente importante.",
+    "Calma, princesa. Uma coisa de cada vez.",
+    "Eu estou aqui, mesmo que seja por essas palavrinhas.",
+    "Você não precisa fingir que está bem comigo.",
+    "Tem dias que só continuar já é muita coisa.",
+    "Eu gosto de você até quando você está toda bagunçadinha por dentro.",
+    "Seu valor não some só porque hoje foi difícil.",
+    "Não deixa um dia ruim te convencer de coisas ruins sobre você.",
+    "Você merece carinho, não cobrança.",
+    "Se sua cabeça estiver cheia, tenta respirar e soltar um pouquinho.",
+    "Eu tenho muito orgulho de você, mesmo quando você acha que não merece.",
+    "Você não é fraca por cansar.",
+    "Queria guardar seu coração num lugar bem calminho.",
+    "Você é mais forte do que pensa, mas também pode descansar.",
+    "Eu gosto de cuidar de você, até de longe.",
+    "Nada em você é demais para mim.",
+    "Se bater vontade de chorar, chora. Não tem problema.",
+    "Eu queria que você se visse com o carinho que eu te vejo.",
+    "Você não precisa carregar tudo sozinha.",
+    "Hoje pode estar confuso, mas não vai ser assim para sempre.",
+    "Eu fico aqui com você, tá?",
+    "Você é minha princesa até nos dias difíceis.",
+    "Não precisa ser perfeita para ser amada.",
+    "Eu amo seu jeitinho, inclusive quando você acha que está impossível.",
+    "Você merece uma pausa sem culpa.",
+    "A vida às vezes pesa, mas você não precisa virar pedra por causa disso.",
+    "Seu coração é bonito, mesmo quando está cansado.",
+    "Se tudo parecer grande demais, começa pelo próximo minuto.",
+    "Eu acredito em você de verdade.",
+    "Você já passou por tanta coisa e ainda está aqui. Isso importa.",
+    "Não esquece de beber água e respirar, meu bem.",
+    "Eu queria transformar sua ansiedade em paz agora.",
+    "Você pode ir devagar. Devagar também chega.",
+    "Eu não vou te achar menos incrível por você ter dias ruins.",
+    "Você é muito mais do que esse momento ruim.",
+    "Se hoje você só conseguir descansar, já está tudo bem.",
+    "Eu queria colocar sua cabecinha no meu peito e deixar o mundo quieto.",
+    "Você não está sozinha nessa.",
+    "Eu amo quando você existe perto de mim, mesmo de longe.",
+    "Seu sorriso faz falta, mas você não precisa forçar ele.",
+    "Pode ficar quietinha se quiser. Eu continuo gostando de você igual.",
+    "Você não precisa explicar tudo para merecer cuidado.",
+    "Eu gosto da sua presença de um jeito muito sincero.",
+    "Respira comigo: devagarzinho, sem pressa.",
+    "Você merece coisas leves.",
+    "Se sua mente estiver brigando com você, lembra que ela não manda na verdade toda.",
+    "Você é linda por dentro também, mesmo quando esquece disso.",
+    "Eu queria estar aí só para te lembrar que vai ficar tudo bem.",
+    "Um dia ruim não apaga a pessoa incrível que você é.",
+    "Não deixa o medo falar mais alto que o carinho que existe por você.",
+    "Você merece ser tratada com calma.",
+    "Eu gosto de você de um jeito que dá vontade de cuidar.",
+    "Se doer, fala comigo. Não guarda tudo aí dentro.",
+    "Você não precisa vencer tudo hoje.",
+    "Eu te escolheria até nos dias complicados.",
+    "Você é uma das minhas partes favoritas da vida.",
+    "Eu sei que às vezes pesa, mas eu tenho orgulho de você.",
+    "Não se compara com ninguém, meu amor. Você tem seu tempo.",
+    "Você não é um problema. Você é uma pessoa que eu amo.",
+    "Se ninguém te disse hoje: eu estou feliz por você existir.",
+    "Eu gosto até das suas manias bobinhas.",
+    "Você merece um carinho bem demorado.",
+    "Eu queria mandar paz direto para seu coração.",
+    "Você pode descansar sem achar que está falhando.",
+    "Seu jeito me faz bem de verdade.",
+    "Não precisa se diminuir para caber em lugar nenhum.",
+    "Você é suficiente, mesmo quando sua cabeça diz que não.",
+    "Eu gosto de você sem precisar de motivo novo todo dia.",
+    "Quando tudo apertar, lembra que eu me importo muito com você.",
+    "Você tem um lugar muito bonito no meu coração.",
+    "Eu amo sua forma de ser, até quando você duvida dela.",
+    "Não some dentro dos seus pensamentos ruins.",
+    "Você merece ser lembrada com amor.",
+    "Eu queria te proteger de tudo que te machuca.",
+    "Se hoje foi um dia daqueles, amanhã a gente tenta de novo.",
+    "Você não precisa dar conta de tudo para merecer orgulho.",
+    "Eu vejo muita coisa boa em você.",
+    "Você é mais querida do que imagina.",
+    "Até seu silêncio tem importância para mim.",
+    "Eu fico feliz só de saber que você existe.",
+    "Não deixa a tristeza te convencer que você está sozinha.",
+    "Você pode ser sensível. Isso também é bonito.",
+    "Eu queria que essa mensagem fosse um abraço.",
+    "Você é muito especial, sério mesmo.",
+    "Se estiver cansada, fecha os olhos um pouco. O mundo espera.",
+    "Eu gosto de você nos detalhes pequenos.",
+    "Você não precisa esconder quando estiver mal.",
+    "Eu não vou embora só porque o dia ficou difícil.",
+    "Você merece alguém que fique com paciência. Eu quero ser esse alguém.",
+    "Seu coração merece descanso.",
+    "Eu te amo mais do que eu consigo escrever bonito.",
+    "Não precisa ter vergonha de precisar de carinho.",
+    "Você é minha pessoa preferida para lembrar do nada.",
+    "Se hoje a vida parece pesada, divide um pouquinho comigo.",
+    "Guarda isso: você é amada.",
+]
 
 
 def voltar() -> None:
@@ -425,6 +529,12 @@ def voltar() -> None:
 
 def avancar() -> None:
     st.session_state.index = (st.session_state.index + 1) % len(FOTOS)
+
+
+def nova_mensagem_conforto() -> None:
+    anterior = st.session_state.get("mensagem_conforto")
+    opcoes = [mensagem for mensagem in MENSAGENS_CONFORTO if mensagem != anterior]
+    st.session_state.mensagem_conforto = random.choice(opcoes)
 
 
 def mostrar_cards(items: list[tuple[str, str]]) -> None:
@@ -597,6 +707,32 @@ st.markdown(
     f"""
     <div class="secret">
         {RECADOS[recado_escolhido]}
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <div class="section-title">
+        <span>conforto</span>
+        <h2>Uma mensagem nova para você</h2>
+        <p>Clica quando o coração apertar. Eu deixei várias aqui para te lembrar que você não está sozinha.</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+if "mensagem_conforto" not in st.session_state:
+    st.session_state.mensagem_conforto = MENSAGENS_CONFORTO[0]
+
+if st.button("💌 Me dá uma mensagem de conforto"):
+    nova_mensagem_conforto()
+
+st.markdown(
+    f"""
+    <div class="secret">
+        {st.session_state.mensagem_conforto}
     </div>
     """,
     unsafe_allow_html=True,

@@ -427,21 +427,24 @@ def avancar() -> None:
     st.session_state.index = (st.session_state.index + 1) % len(FOTOS)
 
 
-def montar_cards(items: list[tuple[str, str]]) -> str:
-    cards = "".join(
-        f'<div class="mini-card"><strong>{titulo}</strong><p>{texto}</p></div>'
-        for titulo, texto in items
-    )
-    return f'<div class="mini-grid">{cards}</div>'
+def mostrar_cards(items: list[tuple[str, str]]) -> None:
+    for inicio in range(0, len(items), 2):
+        colunas = st.columns(2)
+        for coluna, item in zip(colunas, items[inicio : inicio + 2]):
+            titulo, texto = item
+            with coluna:
+                st.markdown(
+                    f'<div class="mini-card"><strong>{titulo}</strong><p>{texto}</p></div>',
+                    unsafe_allow_html=True,
+                )
 
 
-def montar_timeline(items: list[tuple[str, str, str]]) -> str:
-    partes = "".join(
-        f'<div class="timeline-item"><div class="timeline-dot">{icone}</div>'
-        f'<div><strong>{titulo}</strong><p>{texto}</p></div></div>'
-        for icone, titulo, texto in items
-    )
-    return f'<div class="timeline">{partes}</div>'
+def mostrar_timeline(items: list[tuple[str, str, str]]) -> None:
+    for icone, titulo, texto in items:
+        st.markdown(
+            f'<div class="timeline-item"><div class="timeline-dot">{icone}</div><div><strong>{titulo}</strong><p>{texto}</p></div></div>',
+            unsafe_allow_html=True,
+        )
 
 
 if "index" not in st.session_state:
@@ -534,10 +537,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown(
-    f"<div class='soft-card'>{montar_timeline(LINHA_DO_TEMPO)}</div>",
-    unsafe_allow_html=True,
-)
+mostrar_timeline(LINHA_DO_TEMPO)
 
 st.markdown(
     """
@@ -550,10 +550,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown(
-    f"<div class='soft-card'>{montar_cards(MOTIVOS)}</div>",
-    unsafe_allow_html=True,
-)
+mostrar_cards(MOTIVOS)
 
 st.markdown(
     """
@@ -578,10 +575,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown(
-    f"<div class='soft-card'>{montar_cards(PROMESSAS)}</div>",
-    unsafe_allow_html=True,
-)
+mostrar_cards(PROMESSAS)
 
 st.markdown(
     """

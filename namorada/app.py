@@ -408,15 +408,24 @@ st.markdown(
 }
 
 .cd {
-    width: 220px;
-    height: 220px;
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
-    animation: spin 10s linear infinite;
+    object-fit: cover;
+    animation: spin 12s linear infinite;
+
     border: 8px solid rgba(255,255,255,0.08);
 
     box-shadow:
-        0 0 25px rgba(168,85,247,0.4),
-        0 0 60px rgba(168,85,247,0.2);
+        0 0 35px rgba(168,85,247,0.7),
+        0 0 90px rgba(168,85,247,0.4);
+}
+.cd::after {
+    content: "";
+    width: 28px;
+    height: 28px;
+    background: white;
+    border-radius: 50%;
 }
 
 @keyframes spin {
@@ -623,7 +632,19 @@ import os
 caminho_cd = os.path.join(os.path.dirname(__file__), "cd.png")
 imagem_cd = Image.open(caminho_cd)
 
-st.image(imagem_cd, width=220)
+import base64
+
+with open("cd.png", "rb") as f:
+    img_base64 = base64.b64encode(f.read()).decode()
+
+st.markdown(
+    f"""
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <img src="data:image/png;base64,{img_base64}" class="cd">
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.markdown(
     "<p class='texto'>Um cantinho só nosso, feito para guardar memórias, carinho e tudo aquilo que eu nem sempre consigo falar direito.</p>",

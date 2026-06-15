@@ -674,12 +674,12 @@ st.title("Para a Minha Princesa")
 from PIL import Image
 import os
 
-caminho_cd = os.path.join(os.path.dirname(__file__), "cd.png")
+caminho_cd = "cd.png"
 imagem_cd = Image.open(caminho_cd)
 
 import base64
 
-caminho_cd = os.path.join(os.path.dirname(__file__), "cd.png")
+caminho_cd = "cd.png"
 
 with open(caminho_cd, "rb") as f:
     img_base64 = base64.b64encode(f.read()).decode()
@@ -726,8 +726,24 @@ st.markdown(
 
 if os.path.exists(caminho):
     imagem = Image.open(caminho)
-st.image(imagem, use_container_width=True)
-cols = st.columns(len(FOTOS))
+    st.image(imagem, use_container_width=True)
+
+    cols = st.columns(len(FOTOS))
+
+    for i, (foto, _) in enumerate(FOTOS):
+        with cols[i]:
+            caminho_thumb = os.path.join(PASTA, foto)
+
+            if os.path.exists(caminho_thumb):
+                st.image(caminho_thumb, width=140)
+
+                if st.button("Abrir", key=f"thumb_{i}"):
+                    st.session_state.index = i
+                st.rerun()
+else:
+    st.warning(f"Coloque a imagem {arquivo} na mesma pasta do app.")
+
+    cols = st.columns(len(FOTOS))
 
 for i, (foto, _) in enumerate(FOTOS):
     with cols[i]:

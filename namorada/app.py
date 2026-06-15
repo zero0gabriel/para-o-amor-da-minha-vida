@@ -451,7 +451,27 @@ st.markdown(
     background: white;
     border-radius: 50%;
 }
+.cd-container {
+    position: relative;
+    width: 260px;
+    height: 260px;
+}
 
+.cd-hole {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 32px;
+    height: 32px;
+
+    background: #111;
+    border: 4px solid #ddd;
+    border-radius: 50%;
+
+    z-index: 10;
+}
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -666,7 +686,10 @@ with open(caminho_cd, "rb") as f:
 st.markdown(
     f"""
     <div style="display:flex; justify-content:center; margin:20px 0;">
-        <img src="data:image/png;base64,{img_base64}" class="cd">
+        <div class="cd-container">
+    <img src="data:image/png;base64,{img_base64}" class="cd">
+    <div class="cd-hole"></div>
+</div>
     </div>
     """,
     unsafe_allow_html=True,

@@ -9,6 +9,7 @@ import streamlit.components.v1 as components
 # =========================================================
 # CONFIGURAÇÕES PRINCIPAIS
 # =========================================================
+
 st.set_page_config(
     page_title="Para a Minha Princesa",
     page_icon="💜",
@@ -32,20 +33,20 @@ FOTOS = [
 # =========================================================
 # FUNÇÕES AUXILIARES
 # =========================================================
+
 def img_b64(caminho: str) -> str:
     with open(caminho, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-
 def existe(nome_arquivo: str) -> bool:
     return os.path.exists(os.path.join(PASTA, nome_arquivo))
 
-
 def intro_splash():
     caminho_cd = os.path.join(PASTA, "cd.png")
-    cd_tag = ""
     if os.path.exists(caminho_cd):
-        cd_tag = f'<img src="data:image/png;base64,{img_b64(caminho_cd)}" class="splash-cd" />'
+        with open(caminho_cd, "rb") as f:
+            cd_b64 = base64.b64encode(f.read()).decode()
+        cd_tag = f'<img class="splash-cd" src="data:image/png;base64,{cd_b64}" alt="cd">'
     else:
         cd_tag = '<div class="fallback-heart">💜</div>'
 
@@ -146,7 +147,6 @@ def intro_splash():
         unsafe_allow_html=True,
     )
 
-
 def inject_controls():
     """
     Injeta, uma única vez, um mini painel flutuante no documento pai:
@@ -155,320 +155,315 @@ def inject_controls():
     A música é um pad suave gerado com Web Audio API, sem depender de arquivo.
     """
     js = r"""
-    <script>
-    (function () {
-      try {
-        const parentDoc = window.parent.document;
-        if (parentDoc.getElementById("romance-floating-controls")) return;
+<script>
+(function () {
+try {
+    const parentDoc = window.parent.document;
+    if (parentDoc.getElementById("romance-floating-controls")) return;
 
-        const style = parentDoc.createElement("style");
-        style.id = "romance-floating-controls-style";
-        style.textContent = `
-          #romance-floating-controls {
-            position: fixed;
-            top: 14px;
-            right: 14px;
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px;
-            border-radius: 999px;
-            background: rgba(20, 12, 40, 0.28);
-            border: 1px solid rgba(221,214,254,.18);
-            backdrop-filter: blur(14px);
-            box-shadow: 0 18px 42px rgba(0,0,0,.22);
-          }
-
-          html[data-theme="day"] #romance-floating-controls {
-            background: rgba(255, 255, 255, 0.44);
-            border-color: rgba(46, 16, 101, 0.14);
-          }
-
-          .romance-mini-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 999px;
-            border: 1px solid rgba(221,214,254,.22);
-            background: linear-gradient(180deg, rgba(109,40,217,.78), rgba(76,29,149,.78));
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-            box-shadow: 0 10px 24px rgba(76,29,149,.24);
-            font-size: 17px;
-            user-select: none;
-            padding: 0;
-          }
-
-          html[data-theme="day"] .romance-mini-btn {
-            background: linear-gradient(180deg, rgba(124,58,237,.78), rgba(168,85,247,.78));
-            color: #fff;
-          }
-
-          .romance-mini-btn:hover {
-            transform: translateY(-1px) scale(1.04);
-            box-shadow: 0 14px 28px rgba(124,58,237,.32);
-            filter: brightness(1.05);
-          }
-
-          .romance-mini-btn:active { transform: translateY(0) scale(.98); }
-
-          .romance-heart-on {
-            animation: heartPulse 1.25s ease-in-out infinite;
-          }
-
-          @keyframes heartPulse {
-            0%,100% { transform: scale(1); }
-            50% { transform: scale(1.12); }
-          }
-
-          .romance-mini-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 999px;
-            background: rgba(196,181,253,.75);
-            box-shadow: 0 0 10px rgba(196,181,253,.4);
-          }
-
-          .romance-mini-label {
-            font-size: 11px;
-            color: rgba(245,243,255,.85);
-            margin-right: 4px;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-            font-weight: 700;
-            white-space: nowrap;
-          }
-
-          html[data-theme="day"] .romance-mini-label {
-            color: rgba(36, 18, 73, .8);
-          }
-
-          @media (max-width: 600px) {
-            #romance-floating-controls {
-              top: 10px;
-              right: 10px;
-              gap: 6px;
-              padding: 6px;
-            }
-            .romance-mini-btn { width: 34px; height: 34px; font-size: 16px; }
-            .romance-mini-label { display: none; }
-          }
-        `;
-        parentDoc.head.appendChild(style);
-
-        const bar = parentDoc.createElement("div");
-        bar.id = "romance-floating-controls";
-
-        const label = parentDoc.createElement("div");
-        label.className = "romance-mini-label";
-        label.textContent = "tema";
-
-        const themeBtn = parentDoc.createElement("button");
-        themeBtn.type = "button";
-        themeBtn.className = "romance-mini-btn";
-        themeBtn.setAttribute("aria-label", "Alternar dia e noite");
-
-        const musicBtn = parentDoc.createElement("button");
-        musicBtn.type = "button";
-        musicBtn.className = "romance-mini-btn";
-        musicBtn.setAttribute("aria-label", "Tocar ou pausar música");
-
-        const dot = parentDoc.createElement("div");
-        dot.className = "romance-mini-dot";
-
-        bar.appendChild(label);
-        bar.appendChild(themeBtn);
-        bar.appendChild(musicBtn);
-        bar.appendChild(dot);
-        parentDoc.body.appendChild(bar);
-
-        const root = parentDoc.documentElement;
-        const storedTheme = localStorage.getItem("romance-theme");
-        const hour = new Date().getHours();
-        const initialTheme = storedTheme || ((hour >= 6 && hour < 18) ? "day" : "night");
-
-        function applyTheme(theme) {
-          root.setAttribute("data-theme", theme);
-          localStorage.setItem("romance-theme", theme);
-          themeBtn.textContent = theme === "day" ? "☀" : "☾";
-          themeBtn.title = theme === "day" ? "modo dia" : "modo noite";
-        }
-
-        applyTheme(initialTheme);
-
-        themeBtn.addEventListener("click", () => {
-          const current = root.getAttribute("data-theme") || "night";
-          applyTheme(current === "night" ? "day" : "night");
-        });
-
-        // ---------- Música suave, sem arquivo externo ----------
-        let audioCtx = null;
-        let master = null;
-        let oscillators = [];
-        let gainNodes = [];
-        let musicOn = localStorage.getItem("romance-music") === "on";
-
-        function buildPad() {
-          if (audioCtx) return;
-          const AC = window.AudioContext || window.webkitAudioContext;
-          audioCtx = new AC();
-          master = audioCtx.createGain();
-          master.gain.value = 0.0001;
-          master.connect(audioCtx.destination);
-
-          const freqs = [220, 277.18, 329.63, 440];
-          freqs.forEach((freq, i) => {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = i % 2 === 0 ? "sine" : "triangle";
-            osc.frequency.value = freq;
-            gain.gain.value = 0.0;
-
-            osc.connect(gain);
-            gain.connect(master);
-            osc.start();
-
-            oscillators.push(osc);
-            gainNodes.push(gain);
-          });
-
-          // filtro suave
-          const filter = audioCtx.createBiquadFilter();
-          filter.type = "lowpass";
-          filter.frequency.value = 900;
-          master.disconnect();
-          master.connect(filter);
-          filter.connect(audioCtx.destination);
-
-          // modulação leve
-          const lfo = audioCtx.createOscillator();
-          const lfoGain = audioCtx.createGain();
-          lfo.frequency.value = 0.06;
-          lfoGain.gain.value = 0.06;
-          lfo.connect(lfoGain);
-          lfoGain.connect(master.gain);
-          lfo.start();
-
-          window.__romanceLfo = lfo;
-          window.__romanceFilter = filter;
-        }
-
-        async function startMusic() {
-          buildPad();
-          if (audioCtx.state === "suspended") {
-            await audioCtx.resume();
-          }
-          musicOn = true;
-          localStorage.setItem("romance-music", "on");
-          musicBtn.textContent = "💜";
-          musicBtn.classList.add("romance-heart-on");
-
-          const target = 0.08;
-          master.gain.cancelScheduledValues(audioCtx.currentTime);
-          master.gain.setValueAtTime(master.gain.value, audioCtx.currentTime);
-          master.gain.linearRampToValueAtTime(target, audioCtx.currentTime + 0.8);
-
-          gainNodes.forEach((g, i) => {
-            const base = [0.04, 0.025, 0.03, 0.018][i];
-            g.gain.cancelScheduledValues(audioCtx.currentTime);
-            g.gain.setValueAtTime(0.0, audioCtx.currentTime);
-            g.gain.linearRampToValueAtTime(base, audioCtx.currentTime + 1.1);
-          });
-        }
-
-        function stopMusic() {
-          if (!audioCtx) {
-            musicOn = false;
-            localStorage.setItem("romance-music", "off");
-            musicBtn.textContent = "🤍";
-            musicBtn.classList.remove("romance-heart-on");
-            return;
-          }
-
-          musicOn = false;
-          localStorage.setItem("romance-music", "off");
-          musicBtn.textContent = "🤍";
-          musicBtn.classList.remove("romance-heart-on");
-
-          master.gain.cancelScheduledValues(audioCtx.currentTime);
-          master.gain.setValueAtTime(master.gain.value, audioCtx.currentTime);
-          master.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
-
-          gainNodes.forEach(g => {
-            g.gain.cancelScheduledValues(audioCtx.currentTime);
-            g.gain.setValueAtTime(g.gain.value, audioCtx.currentTime);
-            g.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.55);
-          });
-        }
-
-        musicBtn.addEventListener("click", async () => {
-          if (musicOn) {
-            stopMusic();
-          } else {
-            await startMusic();
-          }
-        });
-
-        if (musicOn) {
-          // só marca o ícone; o áudio será iniciado ao primeiro clique do usuário
-          musicBtn.textContent = "💜";
-          musicBtn.classList.add("romance-heart-on");
-        } else {
-          musicBtn.textContent = "🤍";
-        }
-      } catch (e) {
-        console.warn("romance controls error:", e);
+    const style = parentDoc.createElement("style");
+    style.id = "romance-floating-controls-style";
+    style.textContent = `
+      #romance-floating-controls {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        border-radius: 999px;
+        background: rgba(20, 12, 40, 0.28);
+        border: 1px solid rgba(221,214,254,.18);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 18px 42px rgba(0,0,0,.22);
       }
-    })();
-    </script>
-    """
-    components.html(js, height=0, scrolling=False)
 
+      html[data-theme="day"] #romance-floating-controls {
+        background: rgba(255, 255, 255, 0.44);
+        border-color: rgba(46, 16, 101, 0.14);
+      }
+
+      .romance-mini-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        border: 1px solid rgba(221,214,254,.22);
+        background: linear-gradient(180deg, rgba(109,40,217,.78), rgba(76,29,149,.78));
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+        box-shadow: 0 10px 24px rgba(76,29,149,.24);
+        font-size: 17px;
+        user-select: none;
+        padding: 0;
+      }
+
+      html[data-theme="day"] .romance-mini-btn {
+        background: linear-gradient(180deg, rgba(124,58,237,.78), rgba(168,85,247,.78));
+        color: #fff;
+      }
+
+      .romance-mini-btn:hover {
+        transform: translateY(-1px) scale(1.04);
+        box-shadow: 0 14px 28px rgba(124,58,237,.32);
+        filter: brightness(1.05);
+      }
+
+      .romance-mini-btn:active { transform: translateY(0) scale(.98); }
+
+      .romance-heart-on {
+        animation: heartPulse 1.25s ease-in-out infinite;
+      }
+
+      @keyframes heartPulse {
+        0%,100% { transform: scale(1); }
+        50% { transform: scale(1.12); }
+      }
+
+      .romance-mini-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(196,181,253,.75);
+        box-shadow: 0 0 10px rgba(196,181,253,.4);
+      }
+
+      .romance-mini-label {
+        font-size: 11px;
+        color: rgba(245,243,255,.85);
+        margin-right: 4px;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      html[data-theme="day"] .romance-mini-label {
+        color: rgba(36, 18, 73, .8);
+      }
+
+      @media (max-width: 600px) {
+        #romance-floating-controls {
+          top: 10px;
+          right: 10px;
+          gap: 6px;
+          padding: 6px;
+        }
+        .romance-mini-btn { width: 34px; height: 34px; font-size: 16px; }
+        .romance-mini-label { display: none; }
+      }
+    `;
+    parentDoc.head.appendChild(style);
+
+    const bar = parentDoc.createElement("div");
+    bar.id = "romance-floating-controls";
+
+    const label = parentDoc.createElement("div");
+    label.className = "romance-mini-label";
+    label.textContent = "tema";
+
+    const themeBtn = parentDoc.createElement("button");
+    themeBtn.type = "button";
+    themeBtn.className = "romance-mini-btn";
+    themeBtn.setAttribute("aria-label", "Alternar dia e noite");
+
+    const musicBtn = parentDoc.createElement("button");
+    musicBtn.type = "button";
+    musicBtn.className = "romance-mini-btn";
+    musicBtn.setAttribute("aria-label", "Tocar ou pausar música");
+
+    const dot = parentDoc.createElement("div");
+    dot.className = "romance-mini-dot";
+
+    bar.appendChild(label);
+    bar.appendChild(themeBtn);
+    bar.appendChild(musicBtn);
+    bar.appendChild(dot);
+    parentDoc.body.appendChild(bar);
+
+    const root = parentDoc.documentElement;
+    const storedTheme = localStorage.getItem("romance-theme");
+    const hour = new Date().getHours();
+    const initialTheme = storedTheme || ((hour >= 6 && hour < 18) ? "day" : "night");
+
+    function applyTheme(theme) {
+      root.setAttribute("data-theme", theme);
+      localStorage.setItem("romance-theme", theme);
+      themeBtn.textContent = theme === "day" ? "☀" : "☾";
+      themeBtn.title = theme === "day" ? "modo dia" : "modo noite";
+    }
+
+    applyTheme(initialTheme);
+
+    themeBtn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "night";
+      applyTheme(current === "night" ? "day" : "night");
+    });
+
+    // ---------- Música suave, sem arquivo externo ----------
+    let audioCtx = null;
+    let master = null;
+    let oscillators = [];
+    let gainNodes = [];
+    let musicOn = localStorage.getItem("romance-music") === "on";
+
+    function buildPad() {
+      if (audioCtx) return;
+      const AC = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AC();
+      master = audioCtx.createGain();
+      master.gain.value = 0.0001;
+      master.connect(audioCtx.destination);
+
+      const freqs = [220, 277.18, 329.63, 440];
+      freqs.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = i % 2 === 0 ? "sine" : "triangle";
+        osc.frequency.value = freq;
+        gain.gain.value = 0.0;
+
+        osc.connect(gain);
+        gain.connect(master);
+        osc.start();
+
+        oscillators.push(osc);
+        gainNodes.push(gain);
+      });
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.value = 900;
+      master.disconnect();
+      master.connect(filter);
+      filter.connect(audioCtx.destination);
+
+      const lfo = audioCtx.createOscillator();
+      const lfoGain = audioCtx.createGain();
+      lfo.frequency.value = 0.06;
+      lfoGain.gain.value = 0.06;
+      lfo.connect(lfoGain);
+      lfoGain.connect(master.gain);
+      lfo.start();
+
+      window.__romanceLfo = lfo;
+      window.__romanceFilter = filter;
+    }
+
+    async function startMusic() {
+      buildPad();
+      if (audioCtx.state === "suspended") {
+        await audioCtx.resume();
+      }
+      musicOn = true;
+      localStorage.setItem("romance-music", "on");
+      musicBtn.textContent = "💜";
+      musicBtn.classList.add("romance-heart-on");
+
+      const target = 0.08;
+      master.gain.cancelScheduledValues(audioCtx.currentTime);
+      master.gain.setValueAtTime(master.gain.value, audioCtx.currentTime);
+      master.gain.linearRampToValueAtTime(target, audioCtx.currentTime + 0.8);
+
+      gainNodes.forEach((g, i) => {
+        const base = [0.04, 0.025, 0.03, 0.018][i];
+        g.gain.cancelScheduledValues(audioCtx.currentTime);
+        g.gain.setValueAtTime(0.0, audioCtx.currentTime);
+        g.gain.linearRampToValueAtTime(base, audioCtx.currentTime + 1.1);
+      });
+    }
+
+    function stopMusic() {
+      if (!audioCtx) {
+        musicOn = false;
+        localStorage.setItem("romance-music", "off");
+        musicBtn.textContent = "🤍";
+        musicBtn.classList.remove("romance-heart-on");
+        return;
+      }
+
+      musicOn = false;
+      localStorage.setItem("romance-music", "off");
+      musicBtn.textContent = "🤍";
+      musicBtn.classList.remove("romance-heart-on");
+
+      master.gain.cancelScheduledValues(audioCtx.currentTime);
+      master.gain.setValueAtTime(master.gain.value, audioCtx.currentTime);
+      master.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
+
+      gainNodes.forEach(g => {
+        g.gain.cancelScheduledValues(audioCtx.currentTime);
+        g.gain.setValueAtTime(g.gain.value, audioCtx.currentTime);
+        g.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.55);
+      });
+    }
+
+    musicBtn.addEventListener("click", async () => {
+      if (musicOn) {
+        stopMusic();
+      } else {
+        await startMusic();
+      }
+    });
+
+    if (musicOn) {
+      musicBtn.textContent = "💜";
+      musicBtn.classList.add("romance-heart-on");
+    } else {
+      musicBtn.textContent = "🤍";
+    }
+} catch (e) {
+    console.warn("romance controls error:", e);
+}
+})();
+</script>
+"""
+    components.html(js, height=0, scrolling=False)
 
 def render_realtime_counter():
     html = f"""
-    <div class="timer-card">
-      <div class="timer-kicker">tempo do nosso relacionamento</div>
-      <div class="timer-title">em tempo real</div>
-      <div id="timer-main" class="timer-main">carregando...</div>
-      <div class="timer-sub">dias, horas, minutos e segundos desde que tudo começou 💜</div>
-    </div>
+<div class="timer-card">
+  <div class="timer-kicker">tempo do nosso relacionamento</div>
+  <div class="timer-title">em tempo real</div>
+  <div id="timer-main" class="timer-main">carregando...</div>
+  <div class="timer-sub">dias, horas, minutos e segundos desde que tudo começou 💜</div>
+</div>
 
-    <script>
-    (function() {{
-      const start = new Date("{DATA_INICIO_RELACIONAMENTO}");
-      const el = document.getElementById("timer-main");
+<script>
+(function() {{
+  const start = new Date("{DATA_INICIO_RELACIONAMENTO}");
+  const el = document.getElementById("timer-main");
 
-      function pad(n) {{
-        return String(n).padStart(2, "0");
-      }}
+  function pad(n) {{
+    return String(n).padStart(2, "0");
+  }}
 
-      function update() {{
-        const now = new Date();
-        const diff = now - start;
-        if (isNaN(diff)) {{
-          el.innerHTML = "data de início inválida";
-          return;
-        }}
-        const totalSeconds = Math.floor(diff / 1000);
-        const days = Math.floor(totalSeconds / 86400);
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        el.innerHTML = `<span>${{days}}</span> dias <span>${{pad(hours)}}</span> h <span>${{pad(minutes)}}</span> min <span>${{pad(seconds)}}</span> s`;
-      }}
+  function update() {{
+    const now = new Date();
+    const diff = now - start;
+    if (isNaN(diff)) {{
+      el.innerHTML = "data de início inválida";
+      return;
+    }}
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    el.innerHTML = `<span>${{days}}</span> dias <span>${{pad(hours)}}</span> h <span>${{pad(minutes)}}</span> min <span>${{pad(seconds)}}</span> s`;
+  }}
 
-      update();
-      setInterval(update, 1000);
-    }})();
-    </script>
-    """
-    components.html(html, height=180, scrolling=False)
-
+  update();
+  setInterval(update, 1000);
+}})();
+</script>
+"""
+    components.html(html, height=190, scrolling=False)
 
 def section_title(subtitle: str, title: str, text: str = ""):
     extra = f"<p>{text}</p>" if text else ""
@@ -482,7 +477,6 @@ def section_title(subtitle: str, title: str, text: str = ""):
         """,
         unsafe_allow_html=True,
     )
-
 
 def render_cards(items):
     cols = st.columns(2)
@@ -498,7 +492,6 @@ def render_cards(items):
                 unsafe_allow_html=True,
             )
 
-
 def render_timeline(items):
     for icon, title, body in items:
         st.markdown(
@@ -513,7 +506,6 @@ def render_timeline(items):
             """,
             unsafe_allow_html=True,
         )
-
 
 def render_gallery(fotos):
     slides = []
@@ -534,13 +526,13 @@ def render_gallery(fotos):
     slides_html = "".join(
         f"""
         <div class="g-slide">
-            <img src="{src}" loading="lazy" alt="memória">
+            <img src="{src}" loading="lazy" alt="memória {i+1}">
         </div>
-        """ for src, _ in slides
+        """ for i, (src, _) in enumerate(slides)
     )
 
     thumbs_html = "".join(
-        f'<img src="{src}" class="g-thumb {"ativa" if i == 0 else ""}" onclick="goTo({i})" alt="miniatura">'
+        f'<img src="{src}" class="g-thumb {"ativa" if i == 0 else ""}" onclick="goTo({i})" alt="miniatura {i+1}">'
         for i, (src, _) in enumerate(slides)
     )
 
@@ -628,12 +620,12 @@ def render_gallery(fotos):
     }})();
     </script>
     """
-    components.html(html, height=660, scrolling=False)
-
+    components.html(html, height=860, scrolling=False)
 
 # =========================================================
 # CSS GLOBAL: TEMA, CURSOR, LAYOUT, CARDS E BOTOES
 # =========================================================
+
 st.markdown(
     """
     <style>
@@ -781,15 +773,6 @@ st.markdown(
         box-shadow: 0 18px 44px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.46);
     }
 
-    .hero-note {
-        color: var(--text);
-        font-size: 18px;
-        line-height: 1.75;
-        margin: 0 0 28px;
-        padding: 22px 24px;
-        text-align: center;
-    }
-
     .section-title {
         margin: 34px auto 18px;
         text-align: center;
@@ -811,25 +794,6 @@ st.markdown(
         line-height: 1.65;
         margin: 0 auto;
         max-width: 640px;
-    }
-
-    .letter {
-        color: var(--text);
-        font-size: 18px;
-        line-height: 1.85;
-        padding: 20px;
-    }
-
-    .letter p {
-        margin: 0 0 16px;
-    }
-
-    .letter .signature {
-        color: var(--muted-2);
-        font-family: 'Playfair Display', serif;
-        font-size: 24px;
-        margin-top: 18px;
-        text-align: right;
     }
 
     .timeline-item {
@@ -883,84 +847,6 @@ st.markdown(
     }
 
     .mini-card p { margin: 0; }
-
-    .quote {
-        color: var(--text);
-        font-family: 'Playfair Display', serif;
-        font-size: 28px;
-        line-height: 1.45;
-        margin: 0;
-        text-align: center;
-    }
-
-    .quote-small {
-        color: var(--muted-2);
-        font-size: 15px;
-        line-height: 1.7;
-        margin: 14px auto 0;
-        max-width: 560px;
-        text-align: center;
-    }
-
-    .secret {
-        background: linear-gradient(135deg, rgba(109, 40, 217, 0.48), rgba(30, 27, 75, 0.94));
-        border: 1px solid rgba(221, 214, 254, 0.22);
-        border-radius: 22px;
-        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
-        color: #f5f3ff;
-        font-size: 18px;
-        line-height: 1.7;
-        margin-top: 12px;
-        padding: 24px;
-        text-align: center;
-    }
-
-    html[data-theme="day"] .secret {
-        background: linear-gradient(135deg, rgba(124, 58, 237, 0.20), rgba(255, 255, 255, 0.72));
-        color: var(--text);
-    }
-
-    .stButton > button {
-        width: 100%;
-        min-height: 46px;
-        background: linear-gradient(135deg, rgba(109, 40, 217, 0.92), rgba(139, 92, 246, 0.92));
-        color: white;
-        border-radius: 999px;
-        padding: 10px 18px;
-        border: 1px solid rgba(221, 214, 254, 0.22);
-        box-shadow: 0 12px 28px rgba(76, 29, 149, 0.28);
-        transition: 0.18s ease-in-out;
-        font-weight: 700;
-    }
-
-    .stButton > button:hover {
-        background: #8b5cf6;
-        color: white;
-        transform: translateY(-1px);
-        border-color: rgba(255, 255, 255, 0.34);
-        box-shadow: 0 16px 34px rgba(124, 58, 237, 0.34);
-    }
-
-    div[data-baseweb="select"] > div {
-        background: rgba(30, 27, 75, 0.88);
-        border-color: rgba(221, 214, 254, 0.22);
-        border-radius: 16px;
-        color: #f5f3ff;
-    }
-
-    hr {
-        border: none;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(221, 214, 254, 0.32), transparent);
-        margin: 30px 0;
-    }
-
-    div[data-testid="stAlert"] {
-        background: rgba(30, 27, 75, 0.78);
-        color: #ddd6fe;
-        border-color: rgba(196, 181, 253, 0.25);
-        border-radius: 16px;
-    }
 
     .timer-card {
         padding: 20px 18px;
@@ -1029,8 +915,9 @@ st.markdown(
     .g-outer {
         position: relative;
         overflow: hidden;
-        border-radius: 20px;
+        border-radius: 22px;
         box-shadow: 0 12px 36px rgba(0,0,0,.30);
+        touch-action: pan-x;
     }
 
     .g-track {
@@ -1046,24 +933,25 @@ st.markdown(
     .g-slide img {
         width: 100%;
         display: block;
-        object-fit: cover;
-        max-height: 460px;
-        border-radius: 20px;
+        object-fit: contain;
+        max-height: 600px;
+        background: rgba(0,0,0,.22);
+        border-radius: 22px;
     }
 
     .g-arrow {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 38px;
-        height: 38px;
+        width: 46px;
+        height: 46px;
         border-radius: 999px;
         border: 1px solid rgba(221,214,254,.25);
         background: rgba(109,40,217,.72);
         color: white;
-        font-size: 20px;
+        font-size: 24px;
         cursor: pointer;
-        z-index: 3;
+        z-index: 999;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1071,8 +959,8 @@ st.markdown(
         opacity: .94;
     }
 
-    .g-arrow.left { left: 10px; }
-    .g-arrow.right { right: 10px; }
+    .g-arrow.left { left: 12px; }
+    .g-arrow.right { right: 12px; }
 
     .g-arrow:disabled {
         opacity: .22;
@@ -1142,6 +1030,93 @@ st.markdown(
         transform: scale(1.05);
     }
 
+    .stButton > button {
+        width: 100%;
+        min-height: 46px;
+        background: linear-gradient(135deg, rgba(109, 40, 217, 0.92), rgba(139, 92, 246, 0.92));
+        color: white;
+        border-radius: 999px;
+        padding: 10px 18px;
+        border: 1px solid rgba(221, 214, 254, 0.22);
+        box-shadow: 0 12px 28px rgba(76, 29, 149, 0.28);
+        transition: 0.18s ease-in-out;
+        font-weight: 700;
+    }
+
+    .stButton > button:hover {
+        background: #8b5cf6;
+        color: white;
+        transform: translateY(-1px);
+        border-color: rgba(255, 255, 255, 0.34);
+        box-shadow: 0 16px 34px rgba(124, 58, 237, 0.34);
+    }
+
+    div[data-baseweb="select"] > div {
+        background: rgba(30, 27, 75, 0.88);
+        border-color: rgba(221, 214, 254, 0.22);
+        border-radius: 16px;
+        color: #f5f3ff;
+    }
+
+    hr {
+        border: none;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(221, 214, 254, 0.32), transparent);
+        margin: 30px 0;
+    }
+
+    div[data-testid="stAlert"] {
+        background: rgba(30, 27, 75, 0.78);
+        color: #ddd6fe;
+        border-color: rgba(196, 181, 253, 0.25);
+        border-radius: 16px;
+    }
+
+    .hero-note {
+        color: var(--text);
+        font-size: 18px;
+        line-height: 1.75;
+        margin: 0 0 28px;
+        padding: 22px 24px;
+        text-align: center;
+    }
+
+    .quote {
+        color: var(--text);
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        line-height: 1.45;
+        margin: 0;
+        text-align: center;
+    }
+
+    .quote-small {
+        color: var(--muted-2);
+        font-size: 15px;
+        line-height: 1.7;
+        margin: 14px auto 0;
+        max-width: 560px;
+        text-align: center;
+    }
+
+    .secret {
+        background: linear-gradient(135deg, rgba(109, 40, 217, 0.48), rgba(30, 27, 75, 0.94));
+        border: 1px solid rgba(221, 214, 254, 0.22);
+        border-radius: 22px;
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+        color: #f5f3ff;
+        font-size: 18px;
+        line-height: 1.7;
+        margin-top: 12px;
+        padding: 24px;
+        text-align: center;
+    }
+
+    html[data-theme="day"] .secret {
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.20), rgba(255, 255, 255, 0.72));
+        color: var(--text);
+    }
+
     @media (max-width: 640px) {
         .block-container {
             padding-top: 66px;
@@ -1182,6 +1157,16 @@ st.markdown(
             width: 36px;
         }
 
+        .g-slide img {
+            max-height: 360px;
+        }
+
+        .g-arrow {
+            width: 42px;
+            height: 42px;
+            font-size: 22px;
+        }
+
         .g-thumb {
             width: 58px;
             height: 58px;
@@ -1195,6 +1180,7 @@ st.markdown(
 # =========================================================
 # INÍCIO: CONTROLES E TEMA
 # =========================================================
+
 inject_controls()
 
 if "entrou" not in st.session_state:
@@ -1212,42 +1198,30 @@ if not st.session_state.entrou:
 # =========================================================
 # CONTEÚDO PRINCIPAL
 # =========================================================
+
 st.title("Para a Minha Princesa")
 
 caminho_cd = os.path.join(PASTA, "cd.png")
 if os.path.exists(caminho_cd):
-    st.markdown(
-        f"""
-        <div style="display:flex; justify-content:center; margin:18px 0 20px;">
-            <div style="position:relative; width:260px; height:260px;">
-                <img src="data:image/png;base64,{img_b64(caminho_cd)}"
-                     style="width:260px; height:260px; border-radius:50%; object-fit:cover;
-                            animation: spin 12s linear infinite;
-                            border:8px solid rgba(255,255,255,.08);
-                            box-shadow: 0 0 35px rgba(168,85,247,.70), 0 0 90px rgba(168,85,247,.40);" />
-                <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-                            width:32px; height:32px; border-radius:50%;
-                            background:#111; border:4px solid #ddd;"></div>
-            </div>
-        </div>
-        <style>@keyframes spin {{ from {{ transform: rotate(0deg);}} to {{ transform: rotate(360deg);}} }}</style>
-        """,
-        unsafe_allow_html=True,
-    )
+    pass
 else:
     st.warning("Coloque cd.png na mesma pasta do app para o disco girando aparecer.")
 
 st.markdown(
-    "<p class='texto'>Um cantinho só nosso, feito para guardar memórias, carinho e tudo aquilo que eu nem sempre consigo falar direito.</p>",
+    """
+    <div class="hero-note">
+    Um cantinho só nosso, feito para guardar memórias, carinho e tudo aquilo que eu nem sempre consigo falar direito.
+    </div>
+    """,
     unsafe_allow_html=True,
 )
 
 st.markdown(
     """
     <div class="hero-note">
-        eu fiz isso aqui pensando em vc do jeitinho que vc merece.<br>
-        desde 03/09 do ano passado vc virou uma parte enorme de mim, e eu nem sei explicar direito o tamanho disso.<br>
-        então eu juntei nossas memórias, nossas fases e um monte de carinho pra deixar tudo com a nossa cara.
+    eu fiz isso aqui pensando em vc do jeitinho que vc merece.<br>
+    desde 03/09 do ano passado vc virou uma parte enorme de mim, e eu nem sei explicar direito o tamanho disso.<br>
+    então eu juntei nossas memórias, nossas fases e um monte de carinho pra deixar tudo com a nossa cara.
     </div>
     """,
     unsafe_allow_html=True,
@@ -1270,17 +1244,13 @@ section_title(
 
 st.markdown(
     """
-    <div class="soft-card letter">
-        <p>
-            desde que vc entrou na minha vida, tudo ficou mais leve de um jeito que eu nem sei explicar.
-            eu gosto das nossas conversas, das nossas risadas, das nossas fases aleatórias e até dos momentos em que a gente só fica existindo junto.
-            queria algo que parecesse comigo, com vc, com a nossa história.
-        </p>
-        <p>
-            eu amo como a gente se ajuda, como a gente se entende e como o nosso amor é reciproco.
-            vc é minha princesa, meu bem, e uma das partes mais lindas da minha vida.
-        </p>
-        <div class="signature">com carinho, gabriel 💜</div>
+    <div class="soft-card" style="padding:22px 20px; line-height:1.85; color:var(--text); font-size:18px;">
+    desde que vc entrou na minha vida, tudo ficou mais leve de um jeito que eu nem sei explicar.<br><br>
+    eu gosto das nossas conversas, das nossas risadas, das nossas fases aleatórias e até dos momentos em que a gente só fica existindo junto.<br>
+    queria algo que parecesse comigo, com vc, com a nossa história.<br><br>
+    eu amo como a gente se ajuda, como a gente se entende e como o nosso amor é reciproco.<br>
+    vc é minha princesa, meu bem, e uma das partes mais lindas da minha vida.<br><br>
+    com carinho, gabriel 💜
     </div>
     """,
     unsafe_allow_html=True,
@@ -1311,11 +1281,11 @@ render_cards([
 
 st.markdown(
     """
-    <div class="soft-card" style="padding:20px;">
-        <p class="quote">"vc é a mãe que eu quero pros meus filhos."</p>
-        <p class="quote-small">
-            eu falo isso sem medo, pq eu sinto de verdade. vc é amor, parceria e paz pra mim.
-        </p>
+    <div class="quote">
+    "vc é a mãe que eu quero pros meus filhos."
+    </div>
+    <div class="quote-small">
+    eu falo isso sem medo, pq eu sinto de verdade. vc é amor, parceria e paz pra mim.
     </div>
     """,
     unsafe_allow_html=True,
@@ -1382,12 +1352,13 @@ with col_a:
 
 with col_b:
     if st.button("✨ Trocar recado"):
-        st.session_state.mensagem_atual = mensagens[recado][(mensagens[recado].index(st.session_state.mensagem_atual) + 1) % len(mensagens[recado])]
+        opcoes = mensagens[recado]
+        st.session_state.mensagem_atual = opcoes[(opcoes.index(st.session_state.mensagem_atual) + 1) % len(opcoes)]
 
 st.markdown(
     f"""
     <div class="secret">
-        {st.session_state.mensagem_atual}
+    {st.session_state.mensagem_atual}
     </div>
     """,
     unsafe_allow_html=True,
@@ -1399,11 +1370,11 @@ if st.button("💜 Abrir surpresa final"):
     st.balloons()
     st.markdown(
         """
-        <div class="secret">
-            minha princesa...<br><br>
-            eu fiz isso aqui pensando em vc do jeitinho que vc é, com cada detalhe nosso que eu guardo aqui.<br><br>
-            eu amo vc do fundo do meu coração, de um jeito que eu não consigo expressar bonito sempre, mas que é real todos os dias.<br><br>
-            vc é tudo pra mim. e eu vou continuar te escolhendo, te cuidando e te amando, sempre. 💜
+        <div class="hero-note">
+        minha princesa...<br><br>
+        eu fiz isso aqui pensando em vc do jeitinho que vc é, com cada detalhe nosso que eu guardo aqui.<br>
+        eu amo vc do fundo do meu coração, de um jeito que eu não consigo expressar bonito sempre, mas que é real todos os dias.<br>
+        vc é tudo pra mim. e eu vou continuar te escolhendo, te cuidando e te amando, sempre. 💜
         </div>
         """,
         unsafe_allow_html=True,
@@ -1414,9 +1385,9 @@ st.success("🤍 ainda vamos criar muitas memórias juntos, minha princesa 💜"
 
 st.markdown(
     """
-    <noscript>
-      <div class="secret">Se o JavaScript estiver desligado, o contador em tempo real e os botões flutuantes não vão funcionar.</div>
-    </noscript>
+    <div style="text-align:center; color:var(--muted); font-size:14px; line-height:1.6;">
+    Se o JavaScript estiver desligado, o contador em tempo real e os botões flutuantes não vão funcionar.
+    </div>
     """,
     unsafe_allow_html=True,
 )
